@@ -13,6 +13,7 @@ import java.util.ArrayList;
  */
 class Step3 {
 
+    static MyLog log = Utils.log;
     static double[][] run(double[][] step2Result) {
          ArrayList<Double[]>  temp;
         temp = analysis(step2Result);
@@ -29,7 +30,7 @@ class Step3 {
         int width = copyPoza.length;
         int height = copyPoza[0].length;
         Integer ci, cj, wi, wj;
-        
+            log.println("Matricea C dupa analysis");
        
             for (int row = 0; row < height; row++) {
                  for (int col = 0; col < width; col++) {
@@ -44,7 +45,7 @@ class Step3 {
                         while(copyPoza[col][row+wj]==0)
                             wj=wj+1;
                         Double[] var = new Double[]{ci.doubleValue(),cj.doubleValue(),wi.doubleValue(),wj.doubleValue()};
-                        System.out.println(String.format("%f, %f, %f, %f", var[0],var[1],var[2],var[3]));
+                        log.println(String.format("%d, %d, %d, %d", ci,cj,wi,wj));
                         c.add(var);
                     }
                 }
@@ -55,7 +56,7 @@ class Step3 {
     }
 
     private static ArrayList<Double[]> keepAreaUnderThreshold( ArrayList<Double[]> aux, int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+return null;
     }
 
 }
