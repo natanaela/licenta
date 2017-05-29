@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="panelConf" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="rbfClass" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="linearClass" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="gammaLabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="coefLabel" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="gammaField" max="32767" attributes="0"/>
+                          <Component id="coefField" pref="46" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="deleteImgButton" max="32767" attributes="0"/>
+                      <Component id="step1Run" alignment="0" pref="162" max="32767" attributes="0"/>
+                      <Component id="loadImgButton" alignment="0" max="32767" attributes="0"/>
+                      <Component id="step2Run" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                          <Component id="PragStep1" min="-2" pref="35" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="parametru" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="saveImgStep1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                          <Component id="NrIteratii" min="-2" pref="68" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="iteratii" min="-2" pref="29" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="step3Run" max="32767" attributes="0"/>
+                      <Component id="step4Run" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="SVMLabel" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jSP" min="-2" pref="534" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+              <Component id="imgProcSP" min="-2" pref="499" max="-2" attributes="0"/>
+              <EmptySpace min="22" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
+              <Component id="meniuLabel" min="-2" pref="39" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="320" max="-2" attributes="0"/>
+              <Component id="initialImgLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="imgProcLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="224" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="meniuLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="initialImgLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="imgProcLabel" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="loadImgButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="deleteImgButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="step1Run" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="parametru" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="saveImgStep1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="PragStep1" alignment="3" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="step2Run" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="NrIteratii" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                          <Component id="iteratii" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="step3Run" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="step4Run" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="SVMLabel" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="linearClass" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="coefLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="coefField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="rbfClass" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="gammaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="gammaField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="panelConf" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jSP" min="-2" pref="441" max="-2" attributes="0"/>
+                          <Component id="imgProcSP" min="-2" pref="441" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="24" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JScrollPane" name="jSP">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+    </Container>
+    <Component class="javax.swing.JButton" name="loadImgButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Incarca poza"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="loadImgButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="deleteImgButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Sterge poza"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteImgButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="step1Run">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Generare pas 1"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="step1RunActionPerformed"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="imgProcSP">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+    </Container>
+    <Component class="javax.swing.JButton" name="saveImgStep1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Save img"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveImgStep1ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="parametru">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="100"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="parametruActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="step2Run">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Generare pas 2"/>
+        <Property name="actionCommand" type="java.lang.String" value="Step2"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="step2RunActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="NrIteratii">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="  Nr. Iteratii :"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="PragStep1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Prag :"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="iteratii">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="50"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="iteratiiActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="meniuLabel">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="33" red="0" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Meniu"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="initialImgLabel">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="33" red="0" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Poza initiala"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="imgProcLabel">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="33" red="0" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Poza prelucrata"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="step3Run">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Generare pas 3"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="step3RunActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="step4Run">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Generare pas 4"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="step4RunActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="SVMLabel">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="33" red="0" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Clasificator SVM"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="linearClass">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Linear"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="linearClassActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="rbfClass">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="RBF"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="coefLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="coef0="/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="gammaLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="gamma="/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="coefField">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="10000"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="coefFieldActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="gammaField">
+    </Component>
+    <Container class="javax.swing.JPanel" name="panelConf">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="100" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="100" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+    </Container>
+  </SubComponents>
+</Form>
