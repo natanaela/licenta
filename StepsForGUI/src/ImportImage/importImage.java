@@ -99,7 +99,7 @@ public class importImage extends javax.swing.JFrame implements MyLog {
             }
         });
 
-        parametru.setText("100");
+        parametru.setText("50");
         parametru.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 parametruActionPerformed(evt);
