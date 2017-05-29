@@ -445,8 +445,8 @@ public class importImage extends javax.swing.JFrame implements MyLog {
 
         /* Create and display the form */
         importImage myFrame = new importImage();
-//        Utils.log = myFrame;
-        Utils.log = new ConsoleLog();
+        Utils.log = myFrame;
+//        Utils.log = new ConsoleLog();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 myFrame.setVisible(true);
