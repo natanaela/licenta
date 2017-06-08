@@ -335,7 +335,7 @@ public class importImage extends javax.swing.JFrame implements MyLog {
         int width = 850;
         int height = 900;
         imgPrelucrata = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-        imgPrelucrata.setData(img.getSubimage(250, 10, width, height).getRaster());
+        imgPrelucrata.setData(img.getSubimage(250, 0, width, height).getRaster());
         int thresh = Integer.parseInt(parametru.getText());
         pozaBW = new double[width][height];
 

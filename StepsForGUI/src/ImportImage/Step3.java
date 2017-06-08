@@ -6,6 +6,7 @@
 package ImportImage;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  *
@@ -18,10 +19,18 @@ class Step3 {
     static double[][] run(double[][] step2Result) {
         ArrayList<Integer[]> temp;
         temp = analysis(step2Result);
-        temp = keepWithAreaUnderThreshold(temp, 100);
+        temp = keepWithAreaOverThreshold(temp, 100);
         Integer[] randNou = getDistinctRow(temp);
-        log.println(" nr rand nou = " + randNou.length);
-        double[][] toReturn = null;
+        temp = sortRowAfterCornelColumn(temp, randNou);
+        double[][] toReturn = new double[temp.size()][4];
+        for (int i = 0; i < temp.size(); i++) {
+            Integer[] randMatrice = temp.get(i);
+            toReturn[i][0] = randMatrice[0].doubleValue();
+            toReturn[i][1] = randMatrice[1].doubleValue();
+            toReturn[i][2] = randMatrice[2].doubleValue();
+            toReturn[i][3] = randMatrice[3].doubleValue();
+
+        }
         return toReturn;
 
     }
@@ -59,7 +68,7 @@ class Step3 {
 
     }
 
-    private static ArrayList<Integer[]> keepWithAreaUnderThreshold(ArrayList<Integer[]> aux, int thresh) {
+    private static ArrayList<Integer[]> keepWithAreaOverThreshold(ArrayList<Integer[]> aux, int thresh) {
         ArrayList<Integer[]> toReturn = new ArrayList<>();
         for (Integer[] sir : aux) {
             if (sir[2] * sir[3] > thresh) {
@@ -97,6 +106,47 @@ class Step3 {
             randNou.add(temp.get(index)[0]);
         }
         return randNou.toArray(new Integer[]{0});
+    }
+
+    private static ArrayList<Integer[]> sortRowAfterCornelColumn(ArrayList<Integer[]> temp, Integer[] randNou) {
+        ArrayList<Integer[]> oc = new ArrayList<Integer[]>();
+        int nr_randuri = randNou.length;
+        int st, en;
+        for (int j = 0; j < nr_randuri - 2; j++) {
+            ArrayList<Integer[]> t = ordoneazaIntreRanduriDupaColoanaColt(temp, randNou[j], randNou[j + 1]);
+            oc.addAll(t);
+        }
+        ArrayList<Integer[]> t = ordoneazaIntreRanduriDupaColoanaColt(temp, randNou[randNou.length - 1]);
+        oc.addAll(t);
+        return oc;
+    }
+
+    private static ArrayList<Integer[]> ordoneazaIntreRanduriDupaColoanaColt(ArrayList<Integer[]> c, Integer... par) {
+        Integer st = par[0];
+        Integer en = 0;
+        boolean isLastRow = true;
+        if (par.length > 1) {
+            isLastRow = false;
+            en = par[1];
+        }
+
+        ArrayList<Integer[]> bloc = new ArrayList<>();
+
+        for (Integer[] randDinMatrice : c) {
+            if ((isLastRow && randDinMatrice[0] >= st)
+                    || (!isLastRow && randDinMatrice[0] < en && randDinMatrice[0] >= st)) {
+                bloc.add(randDinMatrice);
+            }
+
+        }
+        bloc.sort(new Comparator<Integer[]>() {
+            @Override
+            public int compare(Integer[] o1, Integer[] o2) {
+                return o1[1].compareTo(o2[1]);
+            }
+        });
+
+        return bloc;
     }
 
 }
