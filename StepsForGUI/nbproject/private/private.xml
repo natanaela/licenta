@@ -5,9 +5,8 @@
         <group name="testingJSVM">
             <file>file:/E:/githubRepo/LicentaJava/licenta/StepsForGUI/src/ImportImage/importImage.java</file>
             <file>file:/E:/githubRepo/LicentaJava/licenta/StepsForGUI/src/ImportImage/Step3.java</file>
-            <file>file:/E:/githubRepo/LicentaJava/licenta/StepsForGUI/src/ImportImage/ConsoleLog.java</file>
-            <file>file:/E:/githubRepo/LicentaJava/licenta/StepsForGUI/src/ImportImage/MyLog.java</file>
-            <file>file:/E:/githubRepo/LicentaJava/licenta/StepsForGUI/src/ImportImage/Utils.java</file>
+            <file>file:/E:/githubRepo/LicentaJava/licenta/StepsForGUI/src/ImportImage/Step4.java</file>
+            <file>file:/E:/githubRepo/LicentaJava/licenta/StepsForGUI/src/ImportImage/Step2.java</file>
         </group>
     </open-files>
 </project-private>

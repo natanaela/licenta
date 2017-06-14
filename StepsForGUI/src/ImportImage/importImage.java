@@ -24,8 +24,8 @@ public class importImage extends javax.swing.JFrame implements MyLog {
     private BufferedImage img = null;
     private BufferedImage imgPrelucrata = null;
     private double[][] pozaBW = new double[1][1];
-    private double[][] step2Result = new double[1][1];
-    private double[][] step3Result = new double[1][1];
+    private double[][] step2Result = new double[1][1]; // prima dimensiune este indicele coloana
+    private double[][] step3Result = new double[1][1]; // prima dimensiune este indicele rand
     
     /**
      * Creates new form importImage
@@ -403,7 +403,7 @@ public class importImage extends javax.swing.JFrame implements MyLog {
     }//GEN-LAST:event_coefFieldActionPerformed
 
     private void step4RunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_step4RunActionPerformed
-
+         Step4.Result step4Result = Step4.run(step3Result,step2Result,4,4,15);
        
     }//GEN-LAST:event_step4RunActionPerformed
 
