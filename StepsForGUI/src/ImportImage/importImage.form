@@ -47,7 +47,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="deleteImgButton" max="32767" attributes="0"/>
-                                  <Component id="step1Run" alignment="0" pref="162" max="32767" attributes="0"/>
+                                  <Component id="step1Run" alignment="0" max="32767" attributes="0"/>
                                   <Component id="loadImgButton" alignment="0" max="32767" attributes="0"/>
                                   <Component id="step2Run" alignment="0" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">

@@ -311,6 +311,7 @@ public class importImage extends javax.swing.JFrame implements MyLog {
     private void loadImgButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadImgButtonActionPerformed
         //create file chooser
         JFileChooser jfc = new JFileChooser();
+        jfc.setSelectedFile(new File("PICT0001_croped.JPG"));
         if (jfc.showOpenDialog(loadImgButton) == JFileChooser.APPROVE_OPTION) {
             img = null;
             try {
@@ -332,24 +333,23 @@ public class importImage extends javax.swing.JFrame implements MyLog {
     }//GEN-LAST:event_deleteImgButtonActionPerformed
 
     private void step1RunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_step1RunActionPerformed
-        int width = 850;
-        int height = 900;
+        int width = img.getWidth();
+        int height = img.getHeight();
         imgPrelucrata = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-        imgPrelucrata.setData(img.getSubimage(250, 0, width, height).getRaster());
+        imgPrelucrata.setData(img.getData());
         int thresh = Integer.parseInt(parametru.getText());
-        pozaBW = new double[width][height];
+        pozaBW = new double[height][width];
 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 Color c = new Color(imgPrelucrata.getRGB(x, y));
                 int red = c.getRed();
                 int pixle = red < thresh ? 0 : 255;
-                pozaBW[x][y] = red < thresh ? 0 : red == thresh ? 0.5 : 1;
+                pozaBW[y][x] = red < thresh ? 0 : red == thresh ? 0.5 : 1; // poza cu prima dimensiune = randuri
                 Color cnew = new Color(pixle, pixle, pixle);
                 imgPrelucrata.setRGB(x, y, cnew.getRGB());
             }
         }
-
         ImageIcon icon = new ImageIcon(ScaledImage(imgPrelucrata, jSP.getWidth(), jSP.getHeight()));
         jlab.setIcon(icon);
         //add jLabel to scroll pane
@@ -376,13 +376,13 @@ public class importImage extends javax.swing.JFrame implements MyLog {
         int iteratie = Integer.parseInt(iteratii.getText());
         step2Result = Step2.run(pozaBW, 1, iteratie);
         step2Result = Step2.run(step2Result, 0, 1);
-        
-        int width = step2Result.length;
-        int height = step2Result[0].length;
+            
+        int height = step2Result.length;
+        int  width = step2Result[0].length;
         BufferedImage imgToSHow = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         for (int col = 0; col < width; col++) {
             for (int row = 0; row < height; row++) {
-                int pixel = (int) step2Result[col][row] * 255;
+                int pixel = (int) step2Result[row][col] * 255;
                 Color cnew = new Color(pixel, pixel, pixel);
                 imgToSHow.setRGB(col, row, cnew.getRGB());
             }
@@ -403,7 +403,7 @@ public class importImage extends javax.swing.JFrame implements MyLog {
     }//GEN-LAST:event_coefFieldActionPerformed
 
     private void step4RunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_step4RunActionPerformed
-         Step4.Result step4Result = Step4.run(step3Result,step2Result,4,4,15);
+         Step4.Result step4Result = Step4.run(step3Result,pozaBW,4,4,15);
        
     }//GEN-LAST:event_step4RunActionPerformed
 
@@ -445,6 +445,7 @@ public class importImage extends javax.swing.JFrame implements MyLog {
 
         /* Create and display the form */
         importImage myFrame = new importImage();
+        myFrame.setTitle("SVM");
         Utils.log = myFrame;
 //        Utils.log = new ConsoleLog();
         java.awt.EventQueue.invokeLater(new Runnable() {
