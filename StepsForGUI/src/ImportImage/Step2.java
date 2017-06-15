@@ -16,10 +16,10 @@ public class Step2 {
         w = new double[pozaBW.length][pozaBW[0].length];
         aux = new double[pozaBW.length][pozaBW[0].length];
         copyPoza = pozaBW.clone();
-        int width = copyPoza.length;
-        int height = copyPoza[0].length;
+        int height = copyPoza.length;
+        int width = copyPoza[0].length;
         int sus, jos, dreapta, stanga;
-        double  sign;
+        double sign;
         double a, b, si;
         if (segm == 1) {
             a = 2;
@@ -31,25 +31,35 @@ public class Step2 {
             si = -1;
         }
         for (int step = 0; step < steps; step++) {
-            for (int col = 0; col < width; col ++ ){
-                for (int row = 0; row < height ; row++){
+
+            for (int row = 0; row < height; row++) {
+                for (int col = 0; col < width; col++) {
                     sus = row - 1;
-                    jos = row +1;
-                    stanga = col -1;
+                    jos = row + 1;
+                    stanga = col - 1;
                     dreapta = col + 1;
-                    if (sus < 0) sus = height-1; 
-                    if (jos > height-1) jos = 0;
-                    if (stanga < 0) stanga = width-1;
-                    if ( dreapta > width -1) dreapta = 0;
-                    w[col][row] = a * copyPoza[col][row] + b + copyPoza[col][sus] +copyPoza[col][jos] +copyPoza[stanga][row] +copyPoza[dreapta][row];
-                    sign = (w[col][row] * si)<0.0 ? -1.0 : (w[col][row] * si)>0? 1.0 : 0.0; 
-                    aux[col][row] = (sign + 1 ) / 2;
+                    if (sus < 0) {
+                        sus = height - 1;
+                    }
+                    if (jos > height - 1) {
+                        jos = 0;
+                    }
+                    if (stanga < 0) {
+                        stanga = width - 1;
+                    }
+                    if (dreapta > width - 1) {
+                        dreapta = 0;
+                    }
+                    w[row][col] = a * copyPoza[row][col] + b
+                            + copyPoza[sus][col] + copyPoza[jos][col]
+                            + copyPoza[row][stanga] + copyPoza[row][dreapta];
+                    sign = (w[row][col] * si) < 0.0 ? -1.0 : (w[row][col] * si) > 0 ? 1.0 : 0.0;
+                    aux[row][col] = (sign + 1) / 2;
                 }
             }
             copyPoza = aux;
-
+           
         }
-
         return copyPoza;
     }
 

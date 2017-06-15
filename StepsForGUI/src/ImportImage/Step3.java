@@ -23,14 +23,18 @@ class Step3 {
         Integer[] randNou = getDistinctRow(temp);
         temp = sortRowAfterCornelColumn(temp, randNou);
         double[][] toReturn = new double[temp.size()][4];
+        log.println("Matricea C dupa step 3");
         for (int i = 0; i < temp.size(); i++) {
             Integer[] randMatrice = temp.get(i);
             toReturn[i][0] = randMatrice[0].doubleValue();
             toReturn[i][1] = randMatrice[1].doubleValue();
             toReturn[i][2] = randMatrice[2].doubleValue();
             toReturn[i][3] = randMatrice[3].doubleValue();
-
+            log.println(String.format("%d, %d, %d, %d", 
+                    randMatrice[0],randMatrice[1],
+                    randMatrice[2], randMatrice[3]));
         }
+
         return toReturn;
 
     }
@@ -38,27 +42,27 @@ class Step3 {
     private static ArrayList<Integer[]> analysis(double[][] step2Result) {
         double[][] copyPoza = step2Result.clone();
         ArrayList<Integer[]> c = new ArrayList<>();
-        int width = copyPoza.length;
-        int height = copyPoza[0].length;
+        int height = copyPoza.length;
+        int width = copyPoza[0].length;
         Integer colColtSt, rowColtSus, latimeCol, latimeRow;
-        log.println("Matricea C dupa analysis");
+        
 
         for (int row = 0; row < height; row++) {
             for (int col = 0; col < width; col++) {
-                if (copyPoza[col][row] == 0) {
-                    if (copyPoza[col + 1][row] == 0 && copyPoza[col][row + 1] == 0) {//coltul  
+                if (copyPoza[row][col] == 0) {
+                    if (copyPoza[row][col + 1] == 0 && copyPoza[row + 1][col] == 0) {//coltul  
                         colColtSt = col;
                         rowColtSus = row;
-                        latimeCol = 0;
-                        while (copyPoza[col + latimeCol][row] == 0) {
+                        latimeCol = 1;
+                        while (copyPoza[row][col + latimeCol] == 0) {
                             latimeCol = latimeCol + 1;
                         }
-                        latimeRow = 0;
-                        while (copyPoza[col][row + latimeRow] == 0) {
+                        latimeRow = 1;
+                        while (copyPoza[row + latimeRow][col] == 0) {
                             latimeRow = latimeRow + 1;
                         }
                         Integer[] var = new Integer[]{rowColtSus, colColtSt, latimeRow, latimeCol};
-                        log.println(String.format("%d, %d, %d, %d", rowColtSus, colColtSt, latimeRow, latimeCol));
+                        
                         c.add(var);
                     }
                 }
