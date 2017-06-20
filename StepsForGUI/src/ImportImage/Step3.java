@@ -116,7 +116,7 @@ class Step3 {
         ArrayList<Integer[]> oc = new ArrayList<Integer[]>();
         int nr_randuri = randNou.length;
         int st, en;
-        for (int j = 0; j < nr_randuri - 2; j++) {
+        for (int j = 0; j < nr_randuri - 1; j++) {
             ArrayList<Integer[]> t = ordoneazaIntreRanduriDupaColoanaColt(temp, randNou[j], randNou[j + 1]);
             oc.addAll(t);
         }
