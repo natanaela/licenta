@@ -33,5 +33,23 @@ public class FileUtils {
             System.out.println(e.getMessage());
         }
     }
+    public static void writeFullInFile(String filePath, double[][] mtx) {
+
+        try {
+            PrintWriter writer = new PrintWriter(filePath, "UTF-8");
+            for (int row = 0 ; row < mtx.length; row++){
+                StringBuilder line = new StringBuilder();
+                for( int col = 0 ; col < mtx[row].length; col++){
+                    line.append(mtx[row][col] + ", " );
+                }
+                writer.println(line.toString().substring(0, line.length()-2));
+                    
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 
 }
