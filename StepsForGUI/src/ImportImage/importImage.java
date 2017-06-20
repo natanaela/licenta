@@ -12,6 +12,7 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -26,7 +27,8 @@ public class importImage extends javax.swing.JFrame implements MyLog {
     private double[][] pozaBW = new double[1][1];
     private double[][] step2Result = new double[1][1]; // prima dimensiune este indicele coloana
     private double[][] step3Result = new double[1][1]; // prima dimensiune este indicele rand
-    
+    private Step4.Result step4Result = null;
+
     /**
      * Creates new form importImage
      */
@@ -68,6 +70,7 @@ public class importImage extends javax.swing.JFrame implements MyLog {
         gammaField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         consola = new javax.swing.JTextArea();
+        exportStep4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -176,6 +179,14 @@ public class importImage extends javax.swing.JFrame implements MyLog {
         consola.setRows(5);
         jScrollPane1.setViewportView(consola);
 
+        exportStep4.setText("Export train/test files");
+        exportStep4.setEnabled(false);
+        exportStep4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportStep4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -200,7 +211,7 @@ public class importImage extends javax.swing.JFrame implements MyLog {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(deleteImgButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(step1Run, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                                    .addComponent(step1Run, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(loadImgButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(step2Run, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
@@ -219,7 +230,8 @@ public class importImage extends javax.swing.JFrame implements MyLog {
                                     .addComponent(step4Run, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(40, 40, 40)
-                                        .addComponent(SVMLabel)))
+                                        .addComponent(SVMLabel))
+                                    .addComponent(exportStep4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(124, 124, 124)
                                 .addComponent(jSP, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
@@ -268,28 +280,30 @@ public class importImage extends javax.swing.JFrame implements MyLog {
                                 .addGap(18, 18, 18)
                                 .addComponent(step3Run)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(step4Run))
+                                .addComponent(step4Run)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(exportStep4))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jSP, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(18, 18, 18)
-                        .addComponent(SVMLabel))
+                        .addGap(61, 61, 61)
+                        .addComponent(SVMLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(linearClass)
+                            .addComponent(coefLabel)
+                            .addComponent(coefField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rbfClass)
+                            .addComponent(gammaLabel)
+                            .addComponent(gammaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(37, 37, 37))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(imgProcSP, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(linearClass)
-                    .addComponent(coefLabel)
-                    .addComponent(coefField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rbfClass)
-                    .addComponent(gammaLabel)
-                    .addComponent(gammaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(80, 80, 80))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
@@ -376,9 +390,9 @@ public class importImage extends javax.swing.JFrame implements MyLog {
         int iteratie = Integer.parseInt(iteratii.getText());
         step2Result = Step2.run(pozaBW, 1, iteratie);
         step2Result = Step2.run(step2Result, 0, 1);
-            
+
         int height = step2Result.length;
-        int  width = step2Result[0].length;
+        int width = step2Result[0].length;
         BufferedImage imgToSHow = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         for (int col = 0; col < width; col++) {
             for (int row = 0; row < height; row++) {
@@ -403,18 +417,36 @@ public class importImage extends javax.swing.JFrame implements MyLog {
     }//GEN-LAST:event_coefFieldActionPerformed
 
     private void step4RunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_step4RunActionPerformed
-         Step4.Result step4Result = Step4.run(step3Result,pozaBW,4,4,15);
-       
+        int h = 4, l = 4;
+        step4Result = Step4.run(step3Result, pozaBW, h, l);
+        exportStep4.setEnabled(true);
     }//GEN-LAST:event_step4RunActionPerformed
 
     private void step3RunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_step3RunActionPerformed
         step3Result = Step3.run(step2Result);
-        
+
     }//GEN-LAST:event_step3RunActionPerformed
 
     private void linearClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linearClassActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_linearClassActionPerformed
+
+    private void exportStep4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportStep4ActionPerformed
+        double ratio = 5 / 8.0;
+
+        JFileChooser jfc = new JFileChooser();
+        jfc.setDialogTitle("Save train file database");
+        if (jfc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+
+            File fTrain = jfc.getSelectedFile();
+            jfc.setDialogTitle("Save test file database");
+            if (jfc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+                File fTest = jfc.getSelectedFile();
+                saveTrainTestFile(step4Result, ratio, fTrain, fTest);
+            }
+
+        }
+    }//GEN-LAST:event_exportStep4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -463,6 +495,7 @@ public class importImage extends javax.swing.JFrame implements MyLog {
     private javax.swing.JLabel coefLabel;
     private javax.swing.JTextArea consola;
     private javax.swing.JButton deleteImgButton;
+    private javax.swing.JButton exportStep4;
     private javax.swing.JTextField gammaField;
     private javax.swing.JLabel gammaLabel;
     private javax.swing.JLabel imgProcLabel;
@@ -484,8 +517,52 @@ public class importImage extends javax.swing.JFrame implements MyLog {
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void println(String str) {
-        consola.append(str + "\n");
+    public <T> void println(T t) {
+        consola.append(t.toString() + "\n");
+    }
+
+    @Override
+    public <T> void println(List<T> list) {
+        consola.append("Urmeaza elemente lista:\n");
+        for (T t : list) {
+            consola.append(t.toString() + "\n");
+        }
+    }
+
+    @Override
+    public void println(double[][] d) {
+        consola.append("\n\nUrmeaza elemente din matrice :\n");
+        for (int row = 0; row < d.length; row++) {
+            for (int col = 0; col < d[0].length; col++) {
+                consola.append(d[row][col] + "  ");
+
+            }
+            consola.append("\n");
+        }
+    }
+
+    private void saveTrainTestFile(Step4.Result step4Result, double ratio, File fTrain, File fTest) {
+        int nrRandDinF = step4Result.F.length;
+        int nrColDinF = step4Result.F[0].length;
+        int N1 = (int) Math.round(ratio * nrRandDinF); //nr coloane
+        double[][] labels_samples_Train = new double[N1][nrColDinF + 1];
+        for (int i = 0; i < N1; i++) {
+            labels_samples_Train[i][0] = step4Result.etichete[i].doubleValue();
+            for (int j = 0; j < nrColDinF; j++) {
+                labels_samples_Train[i][j + 1] = step4Result.F[i][j];
+            }
+        }
+        FileUtils.writeFullInFile(fTrain.getAbsolutePath(), labels_samples_Train);
+
+        double[][] labels_samples_Test = new double[nrRandDinF - N1][nrColDinF + 1];
+        for (int i = N1; i < nrRandDinF; i++) {
+            labels_samples_Test[i-N1][0] = step4Result.etichete[i].doubleValue();
+            for (int j = 0; j < nrColDinF; j++) {
+                labels_samples_Test[i-N1][j + 1] = step4Result.F[i][j];
+            }
+        }
+        FileUtils.writeFullInFile(fTest.getAbsolutePath(), labels_samples_Test);
+
     }
 
 }
