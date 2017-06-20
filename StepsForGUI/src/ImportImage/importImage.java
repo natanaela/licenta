@@ -21,19 +21,30 @@ import javax.swing.*;
  * @author Benten
  */
 public class importImage extends javax.swing.JFrame implements MyLog {
-
+    JLabel jlab = new JLabel(); 
     private BufferedImage img = null;
     private BufferedImage imgPrelucrata = null;
     private double[][] pozaBW = new double[1][1];
     private double[][] step2Result = new double[1][1]; // prima dimensiune este indicele coloana
     private double[][] step3Result = new double[1][1]; // prima dimensiune este indicele rand
     private Step4.Result step4Result = null;
-
+    private JPanel rbfParamPanel = new JPanel();
+    private JPanel liniarParamPanel = new JPanel();
     /**
      * Creates new form importImage
      */
     public importImage() {
         initComponents();
+        rbfParamPanel.add(new JLabel("par rbf 1"));
+        rbfParamPanel.add(new JLabel("par rbf 2"));
+        liniarParamPanel.add(new JLabel("par liniar 1"));
+        liniarParamPanel.add(new JLabel("par liniar 2"));
+        rbfParamPanel.setVisible(false);
+        liniarParamPanel.setVisible(false);
+        
+        panelParamSVM.add(rbfParamPanel);
+        panelParamSVM.add(liniarParamPanel);
+        
     }
 
     /**
@@ -45,32 +56,30 @@ public class importImage extends javax.swing.JFrame implements MyLog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jSP = new javax.swing.JScrollPane();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
         loadImgButton = new javax.swing.JButton();
         deleteImgButton = new javax.swing.JButton();
         step1Run = new javax.swing.JButton();
-        imgProcSP = new javax.swing.JScrollPane();
-        saveImgStep1 = new javax.swing.JButton();
+        PragStep1 = new javax.swing.JLabel();
         parametru = new javax.swing.JTextField();
+        saveImgStep1 = new javax.swing.JButton();
+        meniuLabel = new javax.swing.JLabel();
         step2Run = new javax.swing.JButton();
         NrIteratii = new javax.swing.JLabel();
-        PragStep1 = new javax.swing.JLabel();
         iteratii = new javax.swing.JTextField();
-        meniuLabel = new javax.swing.JLabel();
-        initialImgLabel = new javax.swing.JLabel();
-        imgProcLabel = new javax.swing.JLabel();
         step3Run = new javax.swing.JButton();
         step4Run = new javax.swing.JButton();
-        SVMLabel = new javax.swing.JLabel();
-        linearClass = new javax.swing.JRadioButton();
-        rbfClass = new javax.swing.JRadioButton();
-        coefLabel = new javax.swing.JLabel();
-        gammaLabel = new javax.swing.JLabel();
-        coefField = new javax.swing.JTextField();
-        gammaField = new javax.swing.JTextField();
+        exportStep4 = new javax.swing.JButton();
+        jSP = new javax.swing.JScrollPane();
+        initialImgLabel = new javax.swing.JLabel();
+        imgProcSP = new javax.swing.JScrollPane();
+        imgProcLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         consola = new javax.swing.JTextArea();
-        exportStep4 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        panelParamSVM = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -95,12 +104,7 @@ public class importImage extends javax.swing.JFrame implements MyLog {
             }
         });
 
-        saveImgStep1.setText("Save img");
-        saveImgStep1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveImgStep1ActionPerformed(evt);
-            }
-        });
+        PragStep1.setText("Prag :");
 
         parametru.setText("50");
         parametru.addActionListener(new java.awt.event.ActionListener() {
@@ -108,6 +112,16 @@ public class importImage extends javax.swing.JFrame implements MyLog {
                 parametruActionPerformed(evt);
             }
         });
+
+        saveImgStep1.setText("Save img");
+        saveImgStep1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveImgStep1ActionPerformed(evt);
+            }
+        });
+
+        meniuLabel.setForeground(new java.awt.Color(0, 51, 255));
+        meniuLabel.setText("Meniu");
 
         step2Run.setText("Generare pas 2");
         step2Run.setActionCommand("Step2");
@@ -119,23 +133,12 @@ public class importImage extends javax.swing.JFrame implements MyLog {
 
         NrIteratii.setText("  Nr. Iteratii :");
 
-        PragStep1.setText("Prag :");
-
         iteratii.setText("50");
         iteratii.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 iteratiiActionPerformed(evt);
             }
         });
-
-        meniuLabel.setForeground(new java.awt.Color(0, 51, 255));
-        meniuLabel.setText("Meniu");
-
-        initialImgLabel.setForeground(new java.awt.Color(0, 51, 255));
-        initialImgLabel.setText("Poza initiala");
-
-        imgProcLabel.setForeground(new java.awt.Color(0, 51, 255));
-        imgProcLabel.setText("Poza prelucrata");
 
         step3Run.setText("Generare pas 3");
         step3Run.addActionListener(new java.awt.event.ActionListener() {
@@ -151,34 +154,6 @@ public class importImage extends javax.swing.JFrame implements MyLog {
             }
         });
 
-        SVMLabel.setForeground(new java.awt.Color(0, 51, 255));
-        SVMLabel.setText("Clasificator SVM");
-
-        linearClass.setText("Linear");
-        linearClass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                linearClassActionPerformed(evt);
-            }
-        });
-
-        rbfClass.setText("RBF");
-
-        coefLabel.setText("coef0=");
-
-        gammaLabel.setText("gamma=");
-
-        coefField.setText("10000");
-        coefField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                coefFieldActionPerformed(evt);
-            }
-        });
-
-        consola.setEditable(false);
-        consola.setColumns(20);
-        consola.setRows(5);
-        jScrollPane1.setViewportView(consola);
-
         exportStep4.setText("Export train/test files");
         exportStep4.setEnabled(false);
         exportStep4.addActionListener(new java.awt.event.ActionListener() {
@@ -187,130 +162,176 @@ public class importImage extends javax.swing.JFrame implements MyLog {
             }
         });
 
+        initialImgLabel.setForeground(new java.awt.Color(0, 51, 255));
+        initialImgLabel.setText("Poza initiala");
+
+        imgProcLabel.setForeground(new java.awt.Color(0, 51, 255));
+        imgProcLabel.setText("Poza prelucrata");
+
+        consola.setEditable(false);
+        consola.setColumns(20);
+        consola.setRows(5);
+        jScrollPane1.setViewportView(consola);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(22, 22, 22)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(step2Run, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(step1Run, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(PragStep1)
+                                        .addGap(5, 5, 5)
+                                        .addComponent(parametru, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(saveImgStep1)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(15, 15, 15)
+                                        .addComponent(NrIteratii)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(iteratii, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(step3Run, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(step4Run, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(exportStep4, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addGap(22, 22, 22)
+                            .addComponent(loadImgButton, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(deleteImgButton, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jSP, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(imgProcSP, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1))
+                .addGap(0, 47, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(meniuLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(188, 188, 188)
+                .addComponent(initialImgLabel)
+                .addGap(265, 265, 265)
+                .addComponent(imgProcLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(meniuLabel)
+                    .addComponent(initialImgLabel)
+                    .addComponent(imgProcLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(loadImgButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(deleteImgButton)
+                        .addGap(35, 35, 35)
+                        .addComponent(step1Run)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(parametru, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(saveImgStep1)
+                            .addComponent(PragStep1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(step2Run)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(NrIteratii, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(iteratii, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(step3Run)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(step4Run)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(exportStep4)
+                        .addGap(7, 7, 7))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jSP, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+                            .addComponent(imgProcSP))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+
+        jTabbedPane1.addTab("tab1", jPanel1);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Liniar", "RBF", "POLY" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelParamSVMLayout = new javax.swing.GroupLayout(panelParamSVM);
+        panelParamSVM.setLayout(panelParamSVMLayout);
+        panelParamSVMLayout.setHorizontalGroup(
+            panelParamSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 264, Short.MAX_VALUE)
+        );
+        panelParamSVMLayout.setVerticalGroup(
+            panelParamSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 179, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
+                .addComponent(panelParamSVM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(645, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(panelParamSVM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(471, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("tab2", jPanel2);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rbfClass)
-                            .addComponent(linearClass))
-                        .addGap(19, 19, 19)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(gammaLabel)
-                            .addComponent(coefLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(gammaField)
-                            .addComponent(coefField, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(deleteImgButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(step1Run, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(loadImgButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(step2Run, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addComponent(PragStep1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(parametru, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(saveImgStep1))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(21, 21, 21)
-                                        .addComponent(NrIteratii, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(iteratii, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(step3Run, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(step4Run, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(40, 40, 40)
-                                        .addComponent(SVMLabel))
-                                    .addComponent(exportStep4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(124, 124, 124)
-                                .addComponent(jSP, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(62, 62, 62)
-                                .addComponent(meniuLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(320, 320, 320)
-                                .addComponent(initialImgLabel)))
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(imgProcLabel)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(imgProcSP, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(250, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1042, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(448, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(meniuLabel)
-                    .addComponent(initialImgLabel)
-                    .addComponent(imgProcLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(loadImgButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(deleteImgButton)
-                                .addGap(35, 35, 35)
-                                .addComponent(step1Run)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(parametru, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(saveImgStep1)
-                                    .addComponent(PragStep1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(28, 28, 28)
-                                .addComponent(step2Run)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(NrIteratii, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(iteratii, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addComponent(step3Run)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(step4Run)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(exportStep4))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jSP, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(61, 61, 61)
-                        .addComponent(SVMLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(linearClass)
-                            .addComponent(coefLabel)
-                            .addComponent(coefField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(rbfClass)
-                            .addComponent(gammaLabel)
-                            .addComponent(gammaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(37, 37, 37))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(imgProcSP, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addComponent(jTabbedPane1))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    //creez un camp
-    JLabel jlab = new JLabel();
 
     //functie care ma ajuta sa iau o parte din imagine
     private Image ScaledImage(Image img, int w, int h) {
@@ -412,10 +433,6 @@ public class importImage extends javax.swing.JFrame implements MyLog {
         // TODO add your handling code here:
     }//GEN-LAST:event_iteratiiActionPerformed
 
-    private void coefFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coefFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_coefFieldActionPerformed
-
     private void step4RunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_step4RunActionPerformed
         int h = 4, l = 4;
         step4Result = Step4.run(step3Result, pozaBW, h, l);
@@ -426,10 +443,6 @@ public class importImage extends javax.swing.JFrame implements MyLog {
         step3Result = Step3.run(step2Result);
 
     }//GEN-LAST:event_step3RunActionPerformed
-
-    private void linearClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linearClassActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_linearClassActionPerformed
 
     private void exportStep4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportStep4ActionPerformed
         double ratio = 5 / 8.0;
@@ -447,6 +460,18 @@ public class importImage extends javax.swing.JFrame implements MyLog {
 
         }
     }//GEN-LAST:event_exportStep4ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        String selectedName = (String) jComboBox1.getSelectedItem();
+        if(selectedName.equals("Liniar")){
+            liniarParamPanel.setVisible(true);
+            liniarParamPanel.validate();
+            rbfParamPanel.setVisible(false);
+        }
+        this.pack();
+        
+        this.validate();
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -490,25 +515,23 @@ public class importImage extends javax.swing.JFrame implements MyLog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel NrIteratii;
     private javax.swing.JLabel PragStep1;
-    private javax.swing.JLabel SVMLabel;
-    private javax.swing.JTextField coefField;
-    private javax.swing.JLabel coefLabel;
     private javax.swing.JTextArea consola;
     private javax.swing.JButton deleteImgButton;
     private javax.swing.JButton exportStep4;
-    private javax.swing.JTextField gammaField;
-    private javax.swing.JLabel gammaLabel;
     private javax.swing.JLabel imgProcLabel;
     private javax.swing.JScrollPane imgProcSP;
     private javax.swing.JLabel initialImgLabel;
     private javax.swing.JTextField iteratii;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jSP;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JRadioButton linearClass;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton loadImgButton;
     private javax.swing.JLabel meniuLabel;
+    private javax.swing.JPanel panelParamSVM;
     private javax.swing.JTextField parametru;
-    private javax.swing.JRadioButton rbfClass;
     private javax.swing.JButton saveImgStep1;
     private javax.swing.JButton step1Run;
     private javax.swing.JButton step2Run;
