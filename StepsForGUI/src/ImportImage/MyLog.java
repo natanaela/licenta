@@ -5,12 +5,17 @@
  */
 package ImportImage;
 
+import java.util.List;
+
 /**
  *
  * @author Benten
  */
 public interface MyLog {
     
-    void println(String str);
+    <T> void println(T t);
     
+    <T> void  println(List<T> list);
+    
+     void println(double[][] d);
 }
