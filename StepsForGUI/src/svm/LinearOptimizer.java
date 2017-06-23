@@ -10,6 +10,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import javax.swing.JTextArea;
 import libsvm.svm;
 import libsvm.svm_model;
 import libsvm.svm_node;
@@ -23,75 +24,44 @@ import libsvm.svm_problem;
 public class LinearOptimizer {
     
     static double[] cValues = new double[]{-5, -3, -1, 1, 3, 5, 7, 9, 11, 13, 15};
-    static double[] gammaValues = new double[]{-15, -13, -11, -9, -7, -5, -3, -1, 1, 3};
 
-    public static svm_parameter getOptimsForTestFile(svm_problem problem, String testFileData) throws IOException {
-        int counter; //counter
-        int maxCounter = 0;
+    public static svm_parameter getOptimsForTestFile(svm_problem problem, String testFileData, JTextArea outputString) throws IOException {
+        double acuratete; //counter
+        double maxAcuratete = 0;
         double cOptim = 0;
-        double gammaOptim = 0;
-
         for (int i = 0; i < cValues.length; i++) {
-            for (int j = 0; j < gammaValues.length; j++) {
-                double C = Math.pow(2, cValues[i]);
-                double gamma = Math.pow(2, gammaValues[j]);
-                counter = 0;//resetez counter-ul
-
-                svm_parameter params = getSvmParameters(C, gamma); //crearea parametrilor
-                svm_model model = svm.svm_train(problem, params); // scoatem un model din problema=trainData si parametri=parametriModel
-                counter = testModelForTestFile(model, testFileData);
-                System.out.println("***************************** c=" + C + " gamma=" + gamma + " ounter=" + counter + "***************************");
-                if (counter > maxCounter) {
-                    maxCounter = counter;
-                    cOptim = C;
-                    gammaOptim = gamma;
-                }
+            double C = Math.pow(2, cValues[i]);
+            acuratete = 0;//resetez acuratetea
+            svm_parameter params = getSvmParameters(C); //crearea parametrilor
+            svm_model model = svm.svm_train(problem, params); // scoatem un model din problema=trainData si parametri=parametriModel
+            acuratete = LoadingLIBSVM.testModelForTestFile(model, testFileData);
+            //System.out.println("***************************** c=" + C + " acuratete=" + acuratete + "***************************");
+            if (acuratete > maxAcuratete) {
+                maxAcuratete = acuratete;
+                cOptim = C;
             }
         }
-        System.out.println("=========================== cOptim=" + cOptim + " gamaOptim=" + gammaOptim +"==========================================================");
-        return getSvmParameters(cOptim, gammaOptim);
+        //System.out.println("=========================== cOptim=" + cOptim +"==========================================================");
+        outputString.append("cOptim=" + cOptim + "\nAcuratete=" + maxAcuratete * 100 + "%\n");
+        return getSvmParameters(cOptim);
     }
 
-    private static svm_parameter getSvmParameters(double c, double g) {
+    public static svm_parameter getParamsForTestFile(svm_problem problem, String testFileData, double C, JTextArea outputString) throws IOException {
+        double acuratete = 0; //counter
+        svm_parameter params = getSvmParameters(C); //crearea parametrilor
+        svm_model model = svm.svm_train(problem, params); // scoatem un model din problema=trainData si parametri=parametriModel
+        acuratete = LoadingLIBSVM.testModelForTestFile(model, testFileData); // returnaza cate labeluri au fost corect gasite
+        outputString.append("C=" + C + "\nAcuratete=" + acuratete * 100 + "%\n");
+        return getSvmParameters(C);
+    }
+    
+    private static svm_parameter getSvmParameters(double c) {
         svm_parameter toReturn = new svm_parameter();
         toReturn.kernel_type = 0;//t
         toReturn.svm_type = 0;//s
-        toReturn.gamma = g;//g
         toReturn.C = c;//c
         toReturn.eps = 0.001;
-
         return toReturn;
-    }
-
-    private static int testModelForTestFile(svm_model model, String testFileData) throws FileNotFoundException, IOException {
-        int counter = 0;
-        double label;
-        Double[] restuParametriiPeLinie;
-        // -------------- citim label si values de pe fiecare linie din fisier --------------
-        FileInputStream fis = new FileInputStream(testFileData);//tinem evidenta streamului, ca si capul de citire de pe un harddisk
-        BufferedReader br = new BufferedReader(new InputStreamReader(fis));
-        String line = null;
-        while ((line = br.readLine()) != null) { //citim o linie din stream
-            String[] params = line.trim().split("\\s+");
-            label = (Double.parseDouble(params[0])); // prima valoare din split pe linie este valoarea labelului
-//            System.out.println(params[0]);
-            restuParametriiPeLinie = new Double[params.length - 1];
-            for (int i = 1; i < params.length; i++) { // citim restul de valori din split si le punem in values
-                restuParametriiPeLinie[i - 1] = (Double.parseDouble(params[i]));
-            }
-            if (matchLabel(label, restuParametriiPeLinie, model)) {
-                counter++;
-            }
-        }
-        br.close();
-// -------------- end citire --------------
-
-        return counter;
-    }
-
-    private static boolean matchLabel(double label, Double[] restuParametriiPeLinie, svm_model model) {
-        double rezultatPredict = LoadingLIBSVM.testPredict(model, restuParametriiPeLinie);
-        return Double.compare(label, rezultatPredict) == 0;
     }
     
 }
