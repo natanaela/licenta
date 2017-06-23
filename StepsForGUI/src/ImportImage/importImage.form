@@ -74,7 +74,7 @@
                               <Component id="PragStep1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                               <Component id="parametru" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="10" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="saveImgStep1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                           </Group>
@@ -388,10 +388,12 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="tabbedPaneParams" min="-2" pref="668" max="-2" attributes="0"/>
-                                  <Component id="loadTrainDB" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="loadTestDB" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="loadTestDB" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="loadTrainDB" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace min="0" pref="341" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="357" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -408,7 +410,7 @@
                       <Component id="typeKernel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="tabbedPaneParams" min="-2" pref="308" max="-2" attributes="0"/>
-                      <EmptySpace pref="270" max="32767" attributes="0"/>
+                      <EmptySpace pref="285" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -577,19 +579,28 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="gammaRbfLabel" max="32767" attributes="0"/>
-                                  <Component id="cRbfLabel" max="32767" attributes="0"/>
-                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="cRbfParam" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="gammaRbfParam" alignment="0" min="-2" pref="46" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="runRBF" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="gammaRbfLabel" max="32767" attributes="0"/>
+                                          <Component id="cRbfLabel" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="cRbfParam" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="gammaRbfParam" alignment="0" min="-2" pref="46" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Component id="runRBF_auto" alignment="1" pref="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                              <Component id="rezultatAcurateteRBF" min="-2" pref="254" max="-2" attributes="0"/>
-                              <EmptySpace pref="244" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="rezultatAcurateteRBF" min="-2" pref="254" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane2" min="-2" pref="349" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace pref="133" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -603,11 +614,20 @@
                                   <Component id="rezultatAcurateteRBF" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="cRbfParam" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cRbfLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="cRbfParam" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cRbfLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="runRBF" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jScrollPane2" alignment="0" min="-2" pref="149" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="209" max="32767" attributes="0"/>
+                              <EmptySpace pref="34" max="32767" attributes="0"/>
+                              <Component id="runRBF_auto" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -648,6 +668,32 @@
                         <Property name="text" type="java.lang.String" value="In urma parametrilor introdusi acuratetea este:"/>
                       </Properties>
                     </Component>
+                    <Component class="javax.swing.JToggleButton" name="runRBF">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="RUN"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="runRBFActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JToggleButton" name="runRBF_auto">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Auto FInd Params"/>
+                      </Properties>
+                    </Component>
+                    <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                      <SubComponents>
+                        <Component class="javax.swing.JTextArea" name="consolaRBF">
+                          <Properties>
+                            <Property name="editable" type="boolean" value="false"/>
+                            <Property name="columns" type="int" value="20"/>
+                            <Property name="rows" type="int" value="5"/>
+                          </Properties>
+                        </Component>
+                      </SubComponents>
+                    </Container>
                   </SubComponents>
                 </Container>
               </SubComponents>
