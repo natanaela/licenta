@@ -15,13 +15,10 @@ import java.io.IOException;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import libsvm.svm;
-import libsvm.svm_model;
 import libsvm.svm_parameter;
 import libsvm.svm_problem;
+import svm.LinearOptimizer;
 import svm.LoadingLIBSVM;
-import static svm.LoadingLIBSVM.inputDataForPrediction;
-import static svm.LoadingLIBSVM.testPredict;
 import svm.RbfOptimizer;
 
 /**
@@ -40,21 +37,12 @@ public class importImage extends javax.swing.JFrame implements MyLog {
     private JPanel liniarParamPanel = new JPanel();
     private String trainFile;
     private String testFile;
+    private String labelsFile;
     /**
      * Creates new form importImage
      */
     public importImage() {
-        initComponents();
-        rbfParamPanel.add(new JLabel("par rbf 1"));
-        rbfParamPanel.add(new JLabel("par rbf 2"));
-        liniarParamPanel.add(new JLabel("par liniar 1"));
-        liniarParamPanel.add(new JLabel("par liniar 2"));
-        rbfParamPanel.setVisible(false);
-        liniarParamPanel.setVisible(false);
-        
-        panelParamSVM.add(rbfParamPanel);
-        panelParamSVM.add(liniarParamPanel);
-        
+        initComponents();            
     }
 
     /**
@@ -69,11 +57,9 @@ public class importImage extends javax.swing.JFrame implements MyLog {
         tabbedPaneGUI = new javax.swing.JTabbedPane();
         panelSteps = new javax.swing.JPanel();
         loadImgButton = new javax.swing.JButton();
-        deleteImgButton = new javax.swing.JButton();
         step1Run = new javax.swing.JButton();
         PragStep1 = new javax.swing.JLabel();
         parametru = new javax.swing.JTextField();
-        saveImgStep1 = new javax.swing.JButton();
         meniuLabel = new javax.swing.JLabel();
         step2Run = new javax.swing.JButton();
         nrIteratii = new javax.swing.JLabel();
@@ -92,28 +78,27 @@ public class importImage extends javax.swing.JFrame implements MyLog {
         hParam = new javax.swing.JTextField();
         lLabel = new javax.swing.JLabel();
         lParam = new javax.swing.JTextField();
+        loadLabesDB = new javax.swing.JButton();
         panelSVM = new javax.swing.JPanel();
         tabbedPaneParams = new javax.swing.JTabbedPane();
         panelLiniarSVM = new javax.swing.JPanel();
-        panelParamSVM = new javax.swing.JPanel();
-        gammaLiniarLabel = new javax.swing.JLabel();
-        gammaLiniarParam = new javax.swing.JTextField();
         cLiniarLabel = new javax.swing.JLabel();
         cLiniarParam = new javax.swing.JTextField();
-        rezultatAcurateteLiniar = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        runLiniar = new javax.swing.JButton();
+        runLiniarAuto = new javax.swing.JButton();
+        rezultatLiniar = new javax.swing.JLabel();
+        liniarSP = new javax.swing.JScrollPane();
+        consolaLiniar = new javax.swing.JTextArea();
         panelRbfSVM = new javax.swing.JPanel();
         gammaRbfLabel = new javax.swing.JLabel();
         gammaRbfParam = new javax.swing.JTextField();
         cRbfLabel = new javax.swing.JLabel();
         cRbfParam = new javax.swing.JTextField();
-        rezultatAcurateteRBF = new javax.swing.JLabel();
-        runRBF = new javax.swing.JToggleButton();
-        runRBF_auto = new javax.swing.JToggleButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        rezultatRBF = new javax.swing.JLabel();
+        rbfSP = new javax.swing.JScrollPane();
         consolaRBF = new javax.swing.JTextArea();
-        typeKernel = new javax.swing.JLabel();
+        runRBF = new javax.swing.JButton();
+        runRBFAuto = new javax.swing.JButton();
         loadTrainDB = new javax.swing.JButton();
         loadTestDB = new javax.swing.JButton();
 
@@ -123,13 +108,6 @@ public class importImage extends javax.swing.JFrame implements MyLog {
         loadImgButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loadImgButtonActionPerformed(evt);
-            }
-        });
-
-        deleteImgButton.setText("Sterge poza");
-        deleteImgButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteImgButtonActionPerformed(evt);
             }
         });
 
@@ -146,13 +124,6 @@ public class importImage extends javax.swing.JFrame implements MyLog {
         parametru.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 parametruActionPerformed(evt);
-            }
-        });
-
-        saveImgStep1.setText("Save img");
-        saveImgStep1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveImgStep1ActionPerformed(evt);
             }
         });
 
@@ -177,6 +148,7 @@ public class importImage extends javax.swing.JFrame implements MyLog {
         });
 
         step3Run.setText("Generare pas 3");
+        step3Run.setEnabled(false);
         step3Run.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 step3RunActionPerformed(evt);
@@ -184,6 +156,7 @@ public class importImage extends javax.swing.JFrame implements MyLog {
         });
 
         step4Run.setText("Generare pas 4");
+        step4Run.setEnabled(false);
         step4Run.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 step4RunActionPerformed(evt);
@@ -215,6 +188,7 @@ public class importImage extends javax.swing.JFrame implements MyLog {
         hLabel.setText("h=");
 
         hParam.setText("4");
+        hParam.setEnabled(false);
         hParam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 hParamActionPerformed(evt);
@@ -224,9 +198,18 @@ public class importImage extends javax.swing.JFrame implements MyLog {
         lLabel.setText("l=");
 
         lParam.setText("4");
+        lParam.setEnabled(false);
         lParam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lParamActionPerformed(evt);
+            }
+        });
+
+        loadLabesDB.setText("Incarca baza de date bruta");
+        loadLabesDB.setEnabled(false);
+        loadLabesDB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadLabesDBActionPerformed(evt);
             }
         });
 
@@ -234,95 +217,90 @@ public class importImage extends javax.swing.JFrame implements MyLog {
         panelSteps.setLayout(panelStepsLayout);
         panelStepsLayout.setHorizontalGroup(
             panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelStepsLayout.createSequentialGroup()
-                .addGap(81, 81, 81)
-                .addComponent(meniuLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(219, 219, 219)
-                .addComponent(initialImgLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(imgProcLabel)
-                .addGap(202, 202, 202))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelStepsLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
                 .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelStepsLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(PragStep1)
-                        .addGap(5, 5, 5)
-                        .addComponent(parametru, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(saveImgStep1)
-                        .addGap(48, 48, 48))
-                    .addGroup(panelStepsLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
                         .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(step1Run, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(step4Run, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
-                                .addComponent(step3Run, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(step2Run, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(exportStep4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(panelStepsLayout.createSequentialGroup()
-                        .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelStepsLayout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addComponent(hLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(hParam, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)
-                                .addComponent(lLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lParam, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(deleteImgButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(loadImgButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE))
                             .addGroup(panelStepsLayout.createSequentialGroup()
                                 .addGap(33, 33, 33)
                                 .addComponent(nrIteratii)
-                                .addGap(28, 28, 28)
-                                .addComponent(iteratii, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(iteratii, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(step1Run, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(step3Run, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(step2Run, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelStepsLayout.createSequentialGroup()
+                                            .addGap(34, 34, 34)
+                                            .addComponent(hLabel)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(hParam, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(28, 28, 28)
+                                            .addComponent(lLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(lParam, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(step4Run, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(exportStep4, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(loadLabesDB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(loadImgButton, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(panelStepsLayout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addComponent(PragStep1)
+                        .addGap(32, 32, 32)
+                        .addComponent(parametru, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rezultatLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(panelStepsLayout.createSequentialGroup()
-                            .addComponent(jSP, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSP, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(30, 30, 30)
                             .addComponent(imgProcSP, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(consolaSP)))
                 .addGap(47, 47, 47))
+            .addGroup(panelStepsLayout.createSequentialGroup()
+                .addGap(101, 101, 101)
+                .addComponent(meniuLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(233, 233, 233)
+                .addComponent(initialImgLabel)
+                .addGap(346, 346, 346)
+                .addComponent(imgProcLabel)
+                .addGap(191, 191, 191))
         );
         panelStepsLayout.setVerticalGroup(
             panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelStepsLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(meniuLabel)
                     .addComponent(initialImgLabel)
-                    .addComponent(imgProcLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(loadImgButton)
+                    .addComponent(imgProcLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(meniuLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelStepsLayout.createSequentialGroup()
-                        .addComponent(deleteImgButton)
-                        .addGap(35, 35, 35)
+                        .addComponent(loadImgButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(step1Run)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(parametru, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(saveImgStep1)
                             .addComponent(PragStep1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(step2Run)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(nrIteratii, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(iteratii, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(step3Run)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(loadLabesDB)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(step4Run)
-                        .addGap(10, 10, 10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(hLabel)
                             .addComponent(hParam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -330,103 +308,92 @@ public class importImage extends javax.swing.JFrame implements MyLog {
                             .addComponent(lParam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(exportStep4)
-                        .addGap(302, 302, 302))
+                        .addGap(329, 329, 329))
                     .addGroup(panelStepsLayout.createSequentialGroup()
                         .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jSP, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
                             .addComponent(imgProcSP))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(rezultatLabel)
-                        .addGap(2, 2, 2)
-                        .addComponent(consolaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(consolaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0))))
         );
 
         tabbedPaneGUI.addTab("Prelucrare Pasi", null, panelSteps, "");
-
-        javax.swing.GroupLayout panelParamSVMLayout = new javax.swing.GroupLayout(panelParamSVM);
-        panelParamSVM.setLayout(panelParamSVMLayout);
-        panelParamSVMLayout.setHorizontalGroup(
-            panelParamSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 549, Short.MAX_VALUE)
-        );
-        panelParamSVMLayout.setVerticalGroup(
-            panelParamSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 106, Short.MAX_VALUE)
-        );
-
-        gammaLiniarLabel.setText("gamma=");
-
-        gammaLiniarParam.setText("5");
-        gammaLiniarParam.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gammaLiniarParamActionPerformed(evt);
-            }
-        });
 
         cLiniarLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         cLiniarLabel.setText("c=");
         cLiniarLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        cLiniarParam.setText("1000");
+        cLiniarParam.setText("10");
         cLiniarParam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cLiniarParamActionPerformed(evt);
             }
         });
 
-        rezultatAcurateteLiniar.setText("In urma parametrilor introdusi acuratetea este:");
+        runLiniar.setText("Ruleaza");
+        runLiniar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                runLiniarActionPerformed(evt);
+            }
+        });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setPreferredSize(new java.awt.Dimension(100, 44));
-        jScrollPane1.setViewportView(jTextArea1);
+        runLiniarAuto.setText("Cauta automat parametrii");
+        runLiniarAuto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                runLiniarAutoActionPerformed(evt);
+            }
+        });
+
+        rezultatLiniar.setText("In urma parametrilor introdusi rezultatele sunt:");
+
+        consolaLiniar.setEditable(false);
+        consolaLiniar.setColumns(20);
+        consolaLiniar.setRows(5);
+        liniarSP.setViewportView(consolaLiniar);
 
         javax.swing.GroupLayout panelLiniarSVMLayout = new javax.swing.GroupLayout(panelLiniarSVM);
         panelLiniarSVM.setLayout(panelLiniarSVMLayout);
         panelLiniarSVMLayout.setHorizontalGroup(
             panelLiniarSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLiniarSVMLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(panelLiniarSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(gammaLiniarLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cLiniarLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelLiniarSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cLiniarParam, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
-                    .addComponent(gammaLiniarParam))
                 .addGroup(panelLiniarSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLiniarSVMLayout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(70, 70, 70)
-                        .addComponent(panelParamSVM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap()
+                        .addComponent(runLiniarAuto))
                     .addGroup(panelLiniarSVMLayout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(rezultatAcurateteLiniar, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(30, 30, 30)
+                        .addGroup(panelLiniarSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(runLiniar)
+                            .addGroup(panelLiniarSVMLayout.createSequentialGroup()
+                                .addComponent(cLiniarLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cLiniarParam, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(30, 30, 30)
+                .addGroup(panelLiniarSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rezultatLiniar, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(liniarSP, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(118, 118, 118))
         );
         panelLiniarSVMLayout.setVerticalGroup(
             panelLiniarSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLiniarSVMLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(panelLiniarSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(29, 29, 29)
+                .addComponent(rezultatLiniar)
+                .addGap(9, 9, 9)
+                .addGroup(panelLiniarSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLiniarSVMLayout.createSequentialGroup()
-                        .addGroup(panelLiniarSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(gammaLiniarLabel)
-                            .addComponent(gammaLiniarParam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rezultatAcurateteLiniar))
+                        .addGroup(panelLiniarSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cLiniarParam)
+                            .addComponent(cLiniarLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelLiniarSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelLiniarSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(cLiniarParam)
-                                .addComponent(cLiniarLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(panelLiniarSVMLayout.createSequentialGroup()
-                        .addGap(0, 29, Short.MAX_VALUE)
-                        .addComponent(panelParamSVM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(120, 120, 120))))
+                        .addComponent(runLiniar)
+                        .addGap(32, 32, 32)
+                        .addComponent(runLiniarAuto))
+                    .addComponent(liniarSP, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(71, 71, 71))
         );
 
         cLiniarLabel.getAccessibleContext().setAccessibleDescription("");
@@ -435,7 +402,7 @@ public class importImage extends javax.swing.JFrame implements MyLog {
 
         gammaRbfLabel.setText("gamma=");
 
-        gammaRbfParam.setText("5");
+        gammaRbfParam.setText("0.5");
         gammaRbfParam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gammaRbfParamActionPerformed(evt);
@@ -446,83 +413,87 @@ public class importImage extends javax.swing.JFrame implements MyLog {
         cRbfLabel.setText("c=");
         cRbfLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        cRbfParam.setText("1000");
+        cRbfParam.setText("10");
         cRbfParam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cRbfParamActionPerformed(evt);
             }
         });
 
-        rezultatAcurateteRBF.setText("In urma parametrilor introdusi acuratetea este:");
+        rezultatRBF.setText("In urma parametrilor introdusi rezultatele sunt:");
 
-        runRBF.setText("RUN");
+        consolaRBF.setEditable(false);
+        consolaRBF.setColumns(20);
+        consolaRBF.setRows(5);
+        rbfSP.setViewportView(consolaRBF);
+
+        runRBF.setText("Ruleaza");
         runRBF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 runRBFActionPerformed(evt);
             }
         });
 
-        runRBF_auto.setText("Auto FInd Params");
-        runRBF_auto.addActionListener(new java.awt.event.ActionListener() {
+        runRBFAuto.setText("Cauta automat parametrii");
+        runRBFAuto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                runRBF_autoActionPerformed(evt);
+                runRBFAutoActionPerformed(evt);
             }
         });
-
-        consolaRBF.setEditable(false);
-        consolaRBF.setColumns(20);
-        consolaRBF.setRows(5);
-        jScrollPane2.setViewportView(consolaRBF);
 
         javax.swing.GroupLayout panelRbfSVMLayout = new javax.swing.GroupLayout(panelRbfSVM);
         panelRbfSVM.setLayout(panelRbfSVMLayout);
         panelRbfSVMLayout.setHorizontalGroup(
             panelRbfSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRbfSVMLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelRbfSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(runRBF)
-                    .addGroup(panelRbfSVMLayout.createSequentialGroup()
-                        .addGroup(panelRbfSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(gammaRbfLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cRbfLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelRbfSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cRbfParam)
-                            .addComponent(gammaRbfParam, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(runRBF_auto, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(50, 50, 50)
                 .addGroup(panelRbfSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rezultatAcurateteRBF, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(133, Short.MAX_VALUE))
+                    .addGroup(panelRbfSVMLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(runRBFAuto))
+                    .addGroup(panelRbfSVMLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(panelRbfSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelRbfSVMLayout.createSequentialGroup()
+                                .addGroup(panelRbfSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(cRbfLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(gammaRbfLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panelRbfSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cRbfParam)
+                                    .addComponent(gammaRbfParam, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(panelRbfSVMLayout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(runRBF)))))
+                .addGap(30, 30, 30)
+                .addGroup(panelRbfSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rezultatRBF, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rbfSP, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(119, 119, 119))
         );
         panelRbfSVMLayout.setVerticalGroup(
             panelRbfSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRbfSVMLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(panelRbfSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(gammaRbfLabel)
-                    .addComponent(gammaRbfParam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rezultatAcurateteRBF))
+                .addGap(29, 29, 29)
+                .addComponent(rezultatRBF)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelRbfSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRbfSVMLayout.createSequentialGroup()
                         .addGroup(panelRbfSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cRbfParam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cRbfLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(runRBF))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addComponent(runRBF_auto)
-                .addGap(23, 23, 23))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelRbfSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(gammaRbfLabel)
+                            .addComponent(gammaRbfParam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(5, 5, 5)
+                        .addComponent(runRBF)
+                        .addGap(18, 18, 18)
+                        .addComponent(runRBFAuto))
+                    .addComponent(rbfSP, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(82, 82, 82))
         );
 
         tabbedPaneParams.addTab("RBF", null, panelRbfSVM, "");
-
-        typeKernel.setForeground(new java.awt.Color(0, 51, 255));
-        typeKernel.setText("Alegeti tipul de kernel");
 
         loadTrainDB.setText("Incarca baza de date train");
         loadTrainDB.addActionListener(new java.awt.event.ActionListener() {
@@ -545,29 +516,22 @@ public class importImage extends javax.swing.JFrame implements MyLog {
             .addGroup(panelSVMLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelSVMLayout.createSequentialGroup()
-                        .addComponent(typeKernel, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(panelSVMLayout.createSequentialGroup()
-                        .addGroup(panelSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tabbedPaneParams, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(loadTestDB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(loadTrainDB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(0, 357, Short.MAX_VALUE))))
+                    .addGroup(panelSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(loadTestDB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(loadTrainDB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
+                    .addComponent(tabbedPaneParams, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 363, Short.MAX_VALUE))
         );
         panelSVMLayout.setVerticalGroup(
             panelSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelSVMLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(29, 29, 29)
                 .addComponent(loadTrainDB)
-                .addGap(2, 2, 2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(loadTestDB)
-                .addGap(11, 11, 11)
-                .addComponent(typeKernel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(tabbedPaneParams, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(285, Short.MAX_VALUE))
+                .addContainerGap(283, Short.MAX_VALUE))
         );
 
         tabbedPaneGUI.addTab("Clasificator SVM", null, panelSVM, "");
@@ -579,7 +543,7 @@ public class importImage extends javax.swing.JFrame implements MyLog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(tabbedPaneGUI, javax.swing.GroupLayout.PREFERRED_SIZE, 1042, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addGap(52, 52, 52))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -597,31 +561,30 @@ public class importImage extends javax.swing.JFrame implements MyLog {
 
     private void exportStep4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportStep4ActionPerformed
         double ratio = 5 / 8.0;
-
         JFileChooser jfc = new JFileChooser();
         jfc.setDialogTitle("Save train file database");
+        jfc.setSelectedFile(new File("trainJava.txt"));
         if (jfc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
-
             File fTrain = jfc.getSelectedFile();
             jfc.setDialogTitle("Save test file database");
+            jfc.setSelectedFile(new File("testJava.txt"));
             if (jfc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
                 File fTest = jfc.getSelectedFile();
                 saveTrainTestFile(step4Result, ratio, fTrain, fTest);
             }
-
         }
     }//GEN-LAST:event_exportStep4ActionPerformed
 
     private void step4RunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_step4RunActionPerformed
-        //int h = 4, l = 4;
         int h = Integer.parseInt(hParam.getText());
         int l = Integer.parseInt(lParam.getText());
-        step4Result = Step4.run(step3Result, pozaBW, h, l);
+        step4Result = Step4.run(step3Result, pozaBW, h, l, labelsFile);
         exportStep4.setEnabled(true);
     }//GEN-LAST:event_step4RunActionPerformed
 
     private void step3RunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_step3RunActionPerformed
         step3Result = Step3.run(step2Result);
+        loadLabesDB.setEnabled(true);
     }//GEN-LAST:event_step3RunActionPerformed
 
     private void iteratiiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iteratiiActionPerformed
@@ -632,7 +595,6 @@ public class importImage extends javax.swing.JFrame implements MyLog {
         int iteratie = Integer.parseInt(iteratii.getText());
         step2Result = Step2.run(pozaBW, 1, iteratie);
         step2Result = Step2.run(step2Result, 0, 1);
-
         int height = step2Result.length;
         int width = step2Result[0].length;
         BufferedImage imgToSHow = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -643,43 +605,26 @@ public class importImage extends javax.swing.JFrame implements MyLog {
                 imgToSHow.setRGB(col, row, cnew.getRGB());
             }
         }
-
         ImageIcon icon = new ImageIcon(ScaledImage(imgToSHow, jSP.getWidth(), jSP.getHeight()));
         jlab.setIcon(icon);
-        //add jLabel to scroll pane
         imgProcSP.getViewport().add(jlab);
+        step3Run.setEnabled(true);
     }//GEN-LAST:event_step2RunActionPerformed
-
-    private void saveImgStep1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveImgStep1ActionPerformed
-        JFileChooser jfc = new JFileChooser();
-        if (imgPrelucrata != null && jfc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
-            try {
-                File f = jfc.getSelectedFile();
-                ImageIO.write(imgPrelucrata, "jpg", f);
-            } catch (IOException e) {
-                System.out.println(e);
-            }
-        }
-    }//GEN-LAST:event_saveImgStep1ActionPerformed
 
     private void parametruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parametruActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_parametruActionPerformed
 
     private void step1RunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_step1RunActionPerformed
-      //  int width = img.getWidth();
-        //int height = img.getHeight();
-        //imgPrelucrata = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-        //imgPrelucrata.setData(img.getData());
-        
         int width = 850;
         int height = 900;
+//        int width = img.getWidth();
+//        int height = img.getHeight();
         imgPrelucrata = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         imgPrelucrata.setData(img.getSubimage(248, 0, width, height).getRaster());
-        
+        //imgPrelucrata.setData(img.getData());        
         int thresh = Integer.parseInt(parametru.getText());
         pozaBW = new double[height][width];
-
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 Color c = new Color(imgPrelucrata.getRGB(x, y));
@@ -692,17 +637,10 @@ public class importImage extends javax.swing.JFrame implements MyLog {
         }
         ImageIcon icon = new ImageIcon(ScaledImage(imgPrelucrata, jSP.getWidth(), jSP.getHeight()));
         jlab.setIcon(icon);
-        //add jLabel to scroll pane
         imgProcSP.getViewport().add(jlab);
     }//GEN-LAST:event_step1RunActionPerformed
 
-    private void deleteImgButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteImgButtonActionPerformed
-        //remove image from jlabel jlab
-        jlab.setIcon(null);
-    }//GEN-LAST:event_deleteImgButtonActionPerformed
-
     private void loadImgButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadImgButtonActionPerformed
-        //create file chooser
         JFileChooser jfc = new JFileChooser();
         jfc.setSelectedFile(new File("PICT0001_croped.JPG"));
         if (jfc.showOpenDialog(loadImgButton) == JFileChooser.APPROVE_OPTION) {
@@ -736,12 +674,10 @@ public class importImage extends javax.swing.JFrame implements MyLog {
         // TODO add your handling code here:
     }//GEN-LAST:event_cLiniarParamActionPerformed
 
-    private void gammaLiniarParamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gammaLiniarParamActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_gammaLiniarParamActionPerformed
-
     private void loadTrainDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadTrainDBActionPerformed
         JFileChooser jfc = new JFileChooser();
+        jfc.setDialogTitle("Incarca baza de date train");
+        jfc.setSelectedFile(new File("trainJava.txt"));
         int train = jfc.showOpenDialog(null);
          if (train== JFileChooser.APPROVE_OPTION) 
         {
@@ -752,6 +688,8 @@ public class importImage extends javax.swing.JFrame implements MyLog {
 
     private void loadTestDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadTestDBActionPerformed
         JFileChooser jfc = new JFileChooser();
+        jfc.setDialogTitle("Incarca baza de date test");
+        jfc.setSelectedFile(new File("testJava.txt"));
         int test = jfc.showOpenDialog(null);
          if (test== JFileChooser.APPROVE_OPTION) 
         {
@@ -761,30 +699,85 @@ public class importImage extends javax.swing.JFrame implements MyLog {
     }//GEN-LAST:event_loadTestDBActionPerformed
 
     private void runRBFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runRBFActionPerformed
-        
-    }//GEN-LAST:event_runRBFActionPerformed
-
-    private void runRBF_autoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runRBF_autoActionPerformed
        try{
         long startTime, stopTime, delta;
         startTime = System.currentTimeMillis();
         svm_problem problem = LoadingLIBSVM.getProblemFromTrainingDataFile(trainFile);
         stopTime = System.currentTimeMillis();
         delta = (stopTime - startTime);
-        consolaRBF.append("-- Problema, folosind baza de train, a fost calculata in " + delta + " ms\n");
-        svm_parameter params = RbfOptimizer.getOptimsForTestFile(problem, testFile ,consolaRBF); // luam parametrii cu acuratetea maxima
-        delta = System.currentTimeMillis() - stopTime;
-        consolaRBF.append("-- Parametrii optimi, folosind baza de test, au fost calculati in " + delta + " ms\n");
-        //svm_parameter params = LinearOptimizer.getOptimsForTestFile(problem, testFileData);
-//        svm_model model = svm.svm_train(problem, params); // scoatem un model din problema=trainData si parametri=parametriModel
-
+        consolaRBF.append("Problema, folosind baza de train, a fost calculata in " + delta + " ms\n");
+        svm_parameter params = RbfOptimizer.getParamsForTestFile(problem, testFile, Double.parseDouble(cRbfParam.getText()),Double.parseDouble(gammaRbfParam.getText()), consolaRBF);
+        consolaRBF.append("\n");
        }
        catch(Exception e){
            consolaRBF.append(e.getMessage() + "\n");
        }
-    }//GEN-LAST:event_runRBF_autoActionPerformed
+    }//GEN-LAST:event_runRBFActionPerformed
 
+    private void runRBFAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runRBFAutoActionPerformed
+        try{
+        consolaRBF.append("Parametrii optimizati\n");
+        long startTime, stopTime, delta;
+        startTime = System.currentTimeMillis();
+        svm_problem problem = LoadingLIBSVM.getProblemFromTrainingDataFile(trainFile);
+        stopTime = System.currentTimeMillis();
+        delta = (stopTime - startTime);
+        consolaRBF.append("Problema, folosind baza de train, a fost calculata in " + delta + " ms\n");
+        svm_parameter params = RbfOptimizer.getOptimsForTestFile(problem, testFile ,consolaRBF); // luam parametrii cu acuratetea maxima
+        delta = System.currentTimeMillis() - stopTime;
+        consolaRBF.append("Parametrii optimi, folosind baza de test, au fost calculati in " + delta + " ms\n");
+        }
+        catch(Exception e){
+           consolaRBF.append(e.getMessage() + "\n");
+        }
+    }//GEN-LAST:event_runRBFAutoActionPerformed
 
+    private void runLiniarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runLiniarActionPerformed
+        try{
+        long startTime, stopTime, delta;
+        startTime = System.currentTimeMillis();
+        svm_problem problem = LoadingLIBSVM.getProblemFromTrainingDataFile(trainFile);
+        stopTime = System.currentTimeMillis();
+        delta = (stopTime - startTime);
+        consolaLiniar.append("Problema, folosind baza de train, a fost calculata in " + delta + " ms\n");
+        svm_parameter params = LinearOptimizer.getParamsForTestFile(problem, testFile, Integer.parseInt(cLiniarParam.getText()), consolaLiniar);
+        }
+       catch(Exception e){
+           consolaLiniar.append(e.getMessage() + "\n");
+       }
+    }//GEN-LAST:event_runLiniarActionPerformed
+
+    private void runLiniarAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runLiniarAutoActionPerformed
+       try{
+        consolaLiniar.append("Parametrii optimizati\n");
+        long startTime, stopTime, delta;
+        startTime = System.currentTimeMillis();
+        svm_problem problem = LoadingLIBSVM.getProblemFromTrainingDataFile(trainFile);
+        stopTime = System.currentTimeMillis();
+        delta = (stopTime - startTime);
+        consolaLiniar.append("Problema, folosind baza de train, a fost calculata in " + delta + " ms\n");
+        svm_parameter params = LinearOptimizer.getOptimsForTestFile(problem, testFile ,consolaLiniar); // luam parametrii cu acuratetea maxima
+        delta = System.currentTimeMillis() - stopTime;
+        consolaLiniar.append("Parametrul optim, folosind baza de test, a fost calculat in " + delta + " ms\n");  }
+        catch(Exception e){
+           consolaLiniar.append(e.getMessage() + "\n");
+        }
+    }//GEN-LAST:event_runLiniarAutoActionPerformed
+
+    private void loadLabesDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadLabesDBActionPerformed
+        JFileChooser jfc = new JFileChooser();
+        jfc.setDialogTitle("Incarca baza de date bruta");
+        jfc.setSelectedFile(new File("etichete.txt"));
+        int label = jfc.showOpenDialog(null);
+         if (label== JFileChooser.APPROVE_OPTION) 
+        {
+            File file = jfc.getSelectedFile();
+            labelsFile= file.getAbsolutePath();
+        }
+        step4Run.setEnabled(true);
+        hParam.setEnabled(true);
+        lParam.setEnabled(true);
+    }//GEN-LAST:event_loadLabesDBActionPerformed
     //functie care ma ajuta sa iau o parte din imagine
     private Image ScaledImage(Image img, int w, int h) {
         BufferedImage resizeImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_BGR);
@@ -821,8 +814,6 @@ public class importImage extends javax.swing.JFrame implements MyLog {
             java.util.logging.Logger.getLogger(importImage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
-        /* Create and display the form */
         importImage myFrame = new importImage();
         myFrame.setTitle("SVM");
         Utils.log = myFrame;
@@ -841,12 +832,10 @@ public class importImage extends javax.swing.JFrame implements MyLog {
     private javax.swing.JLabel cRbfLabel;
     private javax.swing.JTextField cRbfParam;
     private javax.swing.JTextArea consola;
+    private javax.swing.JTextArea consolaLiniar;
     private javax.swing.JTextArea consolaRBF;
     private javax.swing.JScrollPane consolaSP;
-    private javax.swing.JButton deleteImgButton;
     private javax.swing.JButton exportStep4;
-    private javax.swing.JLabel gammaLiniarLabel;
-    private javax.swing.JTextField gammaLiniarParam;
     private javax.swing.JLabel gammaRbfLabel;
     private javax.swing.JTextField gammaRbfParam;
     private javax.swing.JLabel hLabel;
@@ -856,35 +845,34 @@ public class importImage extends javax.swing.JFrame implements MyLog {
     private javax.swing.JLabel initialImgLabel;
     private javax.swing.JTextField iteratii;
     private javax.swing.JScrollPane jSP;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lLabel;
     private javax.swing.JTextField lParam;
+    private javax.swing.JScrollPane liniarSP;
     private javax.swing.JButton loadImgButton;
+    private javax.swing.JButton loadLabesDB;
     private javax.swing.JButton loadTestDB;
     private javax.swing.JButton loadTrainDB;
     private javax.swing.JLabel meniuLabel;
     private javax.swing.JLabel nrIteratii;
     private javax.swing.JPanel panelLiniarSVM;
-    private javax.swing.JPanel panelParamSVM;
     private javax.swing.JPanel panelRbfSVM;
     private javax.swing.JPanel panelSVM;
     private javax.swing.JPanel panelSteps;
     private javax.swing.JTextField parametru;
-    private javax.swing.JLabel rezultatAcurateteLiniar;
-    private javax.swing.JLabel rezultatAcurateteRBF;
+    private javax.swing.JScrollPane rbfSP;
     private javax.swing.JLabel rezultatLabel;
-    private javax.swing.JToggleButton runRBF;
-    private javax.swing.JToggleButton runRBF_auto;
-    private javax.swing.JButton saveImgStep1;
+    private javax.swing.JLabel rezultatLiniar;
+    private javax.swing.JLabel rezultatRBF;
+    private javax.swing.JButton runLiniar;
+    private javax.swing.JButton runLiniarAuto;
+    private javax.swing.JButton runRBF;
+    private javax.swing.JButton runRBFAuto;
     private javax.swing.JButton step1Run;
     private javax.swing.JButton step2Run;
     private javax.swing.JButton step3Run;
     private javax.swing.JButton step4Run;
     private javax.swing.JTabbedPane tabbedPaneGUI;
     private javax.swing.JTabbedPane tabbedPaneParams;
-    private javax.swing.JLabel typeKernel;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -933,7 +921,6 @@ public class importImage extends javax.swing.JFrame implements MyLog {
             }
         }
         FileUtils.writeFullInFile(fTest.getAbsolutePath(), labels_samples_Test);
-
     }
 
 }
