@@ -15,6 +15,14 @@ import java.io.IOException;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import libsvm.svm;
+import libsvm.svm_model;
+import libsvm.svm_parameter;
+import libsvm.svm_problem;
+import svm.LoadingLIBSVM;
+import static svm.LoadingLIBSVM.inputDataForPrediction;
+import static svm.LoadingLIBSVM.testPredict;
+import svm.RbfOptimizer;
 
 /**
  *
@@ -455,6 +463,11 @@ public class importImage extends javax.swing.JFrame implements MyLog {
         });
 
         runRBF_auto.setText("Auto FInd Params");
+        runRBF_auto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                runRBF_autoActionPerformed(evt);
+            }
+        });
 
         consolaRBF.setEditable(false);
         consolaRBF.setColumns(20);
@@ -750,6 +763,26 @@ public class importImage extends javax.swing.JFrame implements MyLog {
     private void runRBFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runRBFActionPerformed
         
     }//GEN-LAST:event_runRBFActionPerformed
+
+    private void runRBF_autoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runRBF_autoActionPerformed
+       try{
+        long startTime, stopTime, delta;
+        startTime = System.currentTimeMillis();
+        svm_problem problem = LoadingLIBSVM.getProblemFromTrainingDataFile(trainFile);
+        stopTime = System.currentTimeMillis();
+        delta = (stopTime - startTime);
+        consolaRBF.append("-- Problema, folosind baza de train, a fost calculata in " + delta + " ms\n");
+        svm_parameter params = RbfOptimizer.getOptimsForTestFile(problem, testFile ,consolaRBF); // luam parametrii cu acuratetea maxima
+        delta = System.currentTimeMillis() - stopTime;
+        consolaRBF.append("-- Parametrii optimi, folosind baza de test, au fost calculati in " + delta + " ms\n");
+        //svm_parameter params = LinearOptimizer.getOptimsForTestFile(problem, testFileData);
+//        svm_model model = svm.svm_train(problem, params); // scoatem un model din problema=trainData si parametri=parametriModel
+
+       }
+       catch(Exception e){
+           consolaRBF.append(e.getMessage() + "\n");
+       }
+    }//GEN-LAST:event_runRBF_autoActionPerformed
 
 
     //functie care ma ajuta sa iau o parte din imagine

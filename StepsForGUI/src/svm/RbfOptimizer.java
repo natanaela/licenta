@@ -10,12 +10,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import javax.swing.JTextArea;
 import libsvm.svm;
 import libsvm.svm_model;
 import libsvm.svm_node;
 import libsvm.svm_parameter;
 import libsvm.svm_problem;
-import static loadinglibsvm.LoadingLIBSVM.testFileData;
 
 /**
  *
@@ -25,11 +25,9 @@ public class RbfOptimizer {
 
     static double[] cValues = new double[]{-5, -3, -1, 1, 3, 5, 7, 9, 11, 13, 15};
     static double[] gammaValues = new double[]{-15, -13, -11, -9, -7, -5, -3, -1, 1, 3};
-//    static double[] cValues = new double[]{ 1, 3, 5, 7, 9, 11, 13, 15};
-//    static double[] gammaValues = new double[]{ 1, 3};
 
-    public static svm_parameter getOptimsForTestFile(svm_problem problem, String testFileData) throws IOException {
-        double acuratete=0; //counter
+    public static svm_parameter getOptimsForTestFile(svm_problem problem, String testFileData, JTextArea outputString) throws IOException {
+        double acuratete = 0; //counter
         double maxAcuratete = 0;
         double cOptim = 0;
         double gammaOptim = 0;
@@ -43,7 +41,7 @@ public class RbfOptimizer {
                 svm_parameter params = getSvmParameters(C, gamma); //crearea parametrilor
                 svm_model model = svm.svm_train(problem, params); // scoatem un model din problema=trainData si parametri=parametriModel
                 acuratete = testModelForTestFile(model, testFileData); // returnaza cate labeluri au fost corect gasite
-                System.out.println("***************************** c=" + C + " gamma=" + gamma + " acuratete=" + acuratete*100 + "% ***************************");
+//                System.out.println("***************************** c=" + C + " gamma=" + gamma + " acuratete=" + acuratete*100 + "% ***************************");
                 if (acuratete > maxAcuratete) {
                     maxAcuratete = acuratete;
                     cOptim = C;
@@ -51,8 +49,21 @@ public class RbfOptimizer {
                 }
             }
         }
-        System.out.println("=========================== cOptim=" + cOptim + " gamaOptim=" + gammaOptim + " maxAcuratete=" + maxAcuratete*100 + "% ***************************");
+        outputString.append("=========================== cOptim=" + cOptim + " gamaOptim=" + gammaOptim + " maxAcuratete=" + maxAcuratete * 100 + "% ***************************\n");
         return getSvmParameters(cOptim, gammaOptim);
+    }
+
+    public static svm_parameter getParamsForTestFile(svm_problem problem, String testFileData, double C, double gamma, JTextArea outputString) throws IOException {
+        double acuratete = 0; //counter
+        acuratete = 0;//resetez counter-ul??
+
+        svm_parameter params = getSvmParameters(C, gamma); //crearea parametrilor
+        svm_model model = svm.svm_train(problem, params); // scoatem un model din problema=trainData si parametri=parametriModel
+        acuratete = testModelForTestFile(model, testFileData); // returnaza cate labeluri au fost corect gasite
+//                System.out.println("***************************** c=" + C + " gamma=" + gamma + " acuratete=" + acuratete*100 + "% ***************************");
+
+        outputString.append("=========================== C=" + C + " gamma=" + gamma + " acuratete=" + acuratete * 100 + "% ***************************\n");
+        return getSvmParameters(C, gamma);
     }
 
     private static svm_parameter getSvmParameters(double c, double g) {
@@ -77,7 +88,7 @@ public class RbfOptimizer {
         String line = null;
         while ((line = br.readLine()) != null) { //citim o linie din stream
             counterTotal++;
-            String[] params = line.trim().split("\\s+");
+            String[] params = line.trim().split(",\\s+");
             label = (Double.parseDouble(params[0])); // prima valoare din split pe linie este valoarea labelului
 //            System.out.println(params[0]);
             restuParametriiPeLinie = new Double[params.length - 1];
@@ -91,7 +102,7 @@ public class RbfOptimizer {
         br.close();
 // -------------- end citire --------------
 
-        return counterMatched/(double)counterTotal;
+        return counterMatched / (double) counterTotal;
     }
 
     private static boolean matchLabel(double label, Double[] restuParametriiPeLinie, svm_model model) {

@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import javax.swing.JTextArea;
 import libsvm.*;
 
 /**
@@ -31,7 +32,7 @@ public class LoadingLIBSVM {
     public static void test(String[] args) throws Exception {
 
         svm_problem problem = getProblemFromTrainingDataFile(trainFileData);
-        svm_parameter params = RbfOptimizer.getOptimsForTestFile(problem, testFileData); // luam parametrii cu acuratetea maxima
+        svm_parameter params = RbfOptimizer.getOptimsForTestFile(problem, testFileData ,new JTextArea()); // luam parametrii cu acuratetea maxima
         //svm_parameter params = LinearOptimizer.getOptimsForTestFile(problem, testFileData);
         svm_model model = svm.svm_train(problem, params); // scoatem un model din problema=trainData si parametri=parametriModel
         double label = testPredict(model, inputDataForPrediction);
@@ -48,7 +49,7 @@ public class LoadingLIBSVM {
         BufferedReader br = new BufferedReader(new InputStreamReader(fis));
         String line = null;
         while ((line = br.readLine()) != null) { //citim o linie din stream
-            String[] params = line.trim().split("\\s+");
+            String[] params = line.trim().split(",\\s+");
             labels.add(Double.parseDouble(params[0])); // prima valoare din split pe linie este valoarea labelului
 //            System.out.println(params[0]);
             Double[] v = new Double[params.length - 1];

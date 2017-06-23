@@ -15,7 +15,6 @@ import libsvm.svm_model;
 import libsvm.svm_node;
 import libsvm.svm_parameter;
 import libsvm.svm_problem;
-import static loadinglibsvm.LoadingLIBSVM.testFileData;
 
 /**
  *
