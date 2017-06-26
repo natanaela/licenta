@@ -39,7 +39,8 @@ public class RbfOptimizer {
                 acuratete = 0;//resetez counter-ul
                 svm_parameter params = getSvmParameters(C, gamma); //crearea parametrilor
                 svm_model model = svm.svm_train(problem, params); // scoatem un model din problema=trainData si parametri=parametriModel
-                acuratete = LoadingLIBSVM.testModelForTestFile(model, testFileData); // returnaza cate labeluri au fost corect gasite
+                LoadingLIBSVM.ResultAcurateteAndConfuzie rezultat = LoadingLIBSVM.testModelForTestFile(model, testFileData); // returnaza cate labeluri au fost corect gasite
+                acuratete = rezultat.acuratete;
                 //System.out.println("***************************** c=" + C + " gamma=" + gamma + " acuratete=" + acuratete*100 + "% ***************************");
                 if (acuratete > maxAcuratete) {
                     maxAcuratete = acuratete;
@@ -53,11 +54,10 @@ public class RbfOptimizer {
     }
 
     public static svm_parameter getParamsForTestFile(svm_problem problem, String testFileData, double C, double gamma, JTextArea outputString) throws IOException {
-        double acuratete = 0; //counter
         svm_parameter params = getSvmParameters(C, gamma); //crearea parametrilor
         svm_model model = svm.svm_train(problem, params); // scoatem un model din problema=trainData si parametri=parametriModel
-        acuratete = LoadingLIBSVM.testModelForTestFile(model, testFileData); // returnaza cate labeluri au fost corect gasite
-        outputString.append("C=" + C + "\ngamma=" + gamma + "\nAcuratete=" + acuratete * 100 + "%\n");
+        LoadingLIBSVM.ResultAcurateteAndConfuzie rezultat = LoadingLIBSVM.testModelForTestFile(model, testFileData); // returnaza cate labeluri au fost corect gasite
+        outputString.append("C=" + C + "\ngamma=" + gamma + "\nAcuratete=" + rezultat.acuratete * 100 + "%\n");
         return getSvmParameters(C, gamma);
     }
 

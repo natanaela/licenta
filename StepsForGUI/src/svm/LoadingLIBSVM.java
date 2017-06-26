@@ -93,7 +93,9 @@ public class LoadingLIBSVM {
     }
     
     //metoda folosita pentru a citi labels si sampels din baza de date de test
-    public static double testModelForTestFile(svm_model model, String testFileData) throws FileNotFoundException, IOException {
+    public static ResultAcurateteAndConfuzie testModelForTestFile(svm_model model, String testFileData) throws FileNotFoundException, IOException {
+        ResultAcurateteAndConfuzie toReturn = new ResultAcurateteAndConfuzie();
+        toReturn.confuzie = new int[10][10];
         int counterMatched = 0;
         int counterTotal = 0;
         double label;
@@ -112,14 +114,27 @@ public class LoadingLIBSVM {
             if (matchLabel(label, restuParametriiPeLinie, model)) {
                 counterMatched++;
             }
+            double labelCalculat = getLabel(restuParametriiPeLinie, model);
+            toReturn.confuzie[(int)label][(int)labelCalculat]++;            
         }
         br.close();
-        return counterMatched / (double) counterTotal;
+        toReturn.acuratete = counterMatched / (double) counterTotal;
+        return toReturn;
     }
     
     private static boolean matchLabel(double label, Double[] restuParametriiPeLinie, svm_model model) {
         double rezultatPredict = LoadingLIBSVM.testPredict(model, restuParametriiPeLinie);
         return Double.compare(label, rezultatPredict) == 0;
     }
+
+    private static double getLabel(Double[] restuParametriiPeLinie, svm_model model) {
+         return LoadingLIBSVM.testPredict(model, restuParametriiPeLinie);
+    }
+    
+    public static class ResultAcurateteAndConfuzie{
+        double acuratete;
+        int[][] confuzie;
+    
+}
     
 }

@@ -22,39 +22,47 @@ import libsvm.svm_problem;
  * @author Benten
  */
 public class LinearOptimizer {
-    
+
     static double[] cValues = new double[]{-5, -3, -1, 1, 3, 5, 7, 9, 11, 13, 15};
 
     public static svm_parameter getOptimsForTestFile(svm_problem problem, String testFileData, JTextArea outputString) throws IOException {
         double acuratete; //counter
         double maxAcuratete = 0;
         double cOptim = 0;
+        LoadingLIBSVM.ResultAcurateteAndConfuzie rezultatOptim = new LoadingLIBSVM.ResultAcurateteAndConfuzie();
+        svm_model modelOptim = new svm_model();
         for (int i = 0; i < cValues.length; i++) {
             double C = Math.pow(2, cValues[i]);
             acuratete = 0;//resetez acuratetea
             svm_parameter params = getSvmParameters(C); //crearea parametrilor
             svm_model model = svm.svm_train(problem, params); // scoatem un model din problema=trainData si parametri=parametriModel
-            acuratete = LoadingLIBSVM.testModelForTestFile(model, testFileData);
+            LoadingLIBSVM.ResultAcurateteAndConfuzie rezultat = LoadingLIBSVM.testModelForTestFile(model, testFileData);
+            acuratete = rezultat.acuratete;
             //System.out.println("***************************** c=" + C + " acuratete=" + acuratete + "***************************");
             if (acuratete > maxAcuratete) {
                 maxAcuratete = acuratete;
                 cOptim = C;
+                rezultatOptim = rezultat;
+                modelOptim = model;
             }
         }
         //System.out.println("=========================== cOptim=" + cOptim +"==========================================================");
         outputString.append("cOptim=" + cOptim + "\nAcuratete=" + maxAcuratete * 100 + "%\n");
+        outputString.append("Matricea confuzie:\n" + parseMatrixToString(rezultatOptim.confuzie));
+//        outputString.append("nSV= " + suma(modelOptim.nSV));
         return getSvmParameters(cOptim);
     }
 
     public static svm_parameter getParamsForTestFile(svm_problem problem, String testFileData, double C, JTextArea outputString) throws IOException {
-        double acuratete = 0; //counter
         svm_parameter params = getSvmParameters(C); //crearea parametrilor
         svm_model model = svm.svm_train(problem, params); // scoatem un model din problema=trainData si parametri=parametriModel
-        acuratete = LoadingLIBSVM.testModelForTestFile(model, testFileData); // returnaza cate labeluri au fost corect gasite
-        outputString.append("C=" + C + "\nAcuratete=" + acuratete * 100 + "%\n");
+        LoadingLIBSVM.ResultAcurateteAndConfuzie rezultat = LoadingLIBSVM.testModelForTestFile(model, testFileData); // returnaza cate labeluri au fost corect gasite
+        outputString.append("C=" + C + "\nAcuratete=" + rezultat.acuratete * 100 + "%\n");
+        outputString.append("Matricea confuzie:\n" + parseMatrixToString(rezultat.confuzie));
+//        outputString.append("nSV= " + suma(model.nSV));
         return getSvmParameters(C);
     }
-    
+
     private static svm_parameter getSvmParameters(double c) {
         svm_parameter toReturn = new svm_parameter();
         toReturn.kernel_type = 0;//t
@@ -63,5 +71,24 @@ public class LinearOptimizer {
         toReturn.eps = 0.001;
         return toReturn;
     }
-    
+
+    private static String parseMatrixToString(int[][] confuzie) {
+        StringBuilder toReturn = new StringBuilder();
+        for (int row = 0; row < confuzie.length; row++) {
+            for (int col = 0; col < confuzie[0].length; col++) {
+                toReturn.append(confuzie[row][col] + "  ");
+            }
+            toReturn.append("\n");
+        }
+        return toReturn.toString();
+    }
+
+    private static int suma(int[] nSV) {
+        int toReturn = 0;
+        for (int i : nSV) {
+            toReturn += i;
+        }
+        return toReturn;
+    }
+
 }
