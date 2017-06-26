@@ -217,60 +217,57 @@ public class Interface extends javax.swing.JFrame implements MyLog {
         panelSteps.setLayout(panelStepsLayout);
         panelStepsLayout.setHorizontalGroup(
             panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelStepsLayout.createSequentialGroup()
-                .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(panelStepsLayout.createSequentialGroup()
+                .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelStepsLayout.createSequentialGroup()
                         .addGap(21, 21, 21)
-                        .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(panelStepsLayout.createSequentialGroup()
-                                .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(step3Run, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(step2Run, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(step4Run, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(exportStep4, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(loadLabesDB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(panelStepsLayout.createSequentialGroup()
-                                        .addComponent(hLabel)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(hParam, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(28, 28, 28)
-                                        .addComponent(lLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lParam, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(27, 27, 27))
-                                    .addComponent(loadImgButton, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(step1Run, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                        .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(step3Run, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(step2Run, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(step4Run, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(exportStep4, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(loadLabesDB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(panelStepsLayout.createSequentialGroup()
+                                    .addComponent(hLabel)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(hParam, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(28, 28, 28)
+                                    .addComponent(lLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(lParam, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(27, 27, 27))
+                                .addComponent(loadImgButton, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(step1Run, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panelStepsLayout.createSequentialGroup()
                                 .addComponent(threshStep1)
                                 .addGap(18, 18, 18)
-                                .addComponent(param, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(48, 48, 48))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelStepsLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(nrIteratii)
-                        .addGap(18, 18, 18)
-                        .addComponent(iteratii, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rezultatLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(panelStepsLayout.createSequentialGroup()
-                            .addComponent(jSP, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(30, 30, 30)
-                            .addComponent(imgProcSP, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(consolaSP)))
-                .addGap(47, 47, 47))
-            .addGroup(panelStepsLayout.createSequentialGroup()
-                .addGap(101, 101, 101)
-                .addComponent(meniuLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(233, 233, 233)
-                .addComponent(initialImgLabel)
-                .addGap(346, 346, 346)
-                .addComponent(imgProcLabel)
-                .addGap(191, 191, 191))
+                                .addComponent(param, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelStepsLayout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addComponent(nrIteratii)
+                                .addGap(18, 18, 18)
+                                .addComponent(iteratii, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(12, 12, 12)
+                        .addComponent(jSP, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addComponent(imgProcSP, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelStepsLayout.createSequentialGroup()
+                        .addGap(101, 101, 101)
+                        .addComponent(meniuLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(92, 92, 92)
+                        .addComponent(initialImgLabel)
+                        .addGap(555, 555, 555)
+                        .addComponent(imgProcLabel))
+                    .addGroup(panelStepsLayout.createSequentialGroup()
+                        .addGap(379, 379, 379)
+                        .addComponent(rezultatLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelStepsLayout.createSequentialGroup()
+                        .addGap(245, 245, 245)
+                        .addComponent(consolaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         panelStepsLayout.setVerticalGroup(
             panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -313,13 +310,14 @@ public class Interface extends javax.swing.JFrame implements MyLog {
                         .addComponent(exportStep4)
                         .addGap(458, 458, 458))
                     .addGroup(panelStepsLayout.createSequentialGroup()
-                        .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jSP, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
-                            .addComponent(imgProcSP))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSP, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(imgProcSP, javax.swing.GroupLayout.PREFERRED_SIZE, 554, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(rezultatLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(consolaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(consolaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         tabbedPaneGUI.addTab("Prelucrare Pasi", null, panelSteps, "");
@@ -376,8 +374,8 @@ public class Interface extends javax.swing.JFrame implements MyLog {
                 .addGap(30, 30, 30)
                 .addGroup(panelLiniarSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(resultLiniar, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(liniarSP, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(118, 118, 118))
+                    .addComponent(liniarSP, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         panelLiniarSVMLayout.setVerticalGroup(
             panelLiniarSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -394,8 +392,8 @@ public class Interface extends javax.swing.JFrame implements MyLog {
                         .addComponent(runLiniar)
                         .addGap(32, 32, 32)
                         .addComponent(runLiniarAuto))
-                    .addComponent(liniarSP, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(71, 71, 71))
+                    .addComponent(liniarSP, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(92, 92, 92))
         );
 
         cLiniarLabel.getAccessibleContext().setAccessibleDescription("");
@@ -518,11 +516,11 @@ public class Interface extends javax.swing.JFrame implements MyLog {
             .addGroup(panelSVMLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tabbedPaneParams, javax.swing.GroupLayout.PREFERRED_SIZE, 799, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(loadTestDB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(loadTrainDB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
-                    .addComponent(tabbedPaneParams, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 363, Short.MAX_VALUE))
+                        .addComponent(loadTrainDB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(0, 631, Short.MAX_VALUE))
         );
         panelSVMLayout.setVerticalGroup(
             panelSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -532,8 +530,8 @@ public class Interface extends javax.swing.JFrame implements MyLog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(loadTestDB)
                 .addGap(18, 18, 18)
-                .addComponent(tabbedPaneParams, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(405, Short.MAX_VALUE))
+                .addComponent(tabbedPaneParams, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(305, Short.MAX_VALUE))
         );
 
         tabbedPaneGUI.addTab("Clasificator SVM", null, panelSVM, "");
@@ -542,10 +540,7 @@ public class Interface extends javax.swing.JFrame implements MyLog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(tabbedPaneGUI, javax.swing.GroupLayout.PREFERRED_SIZE, 1042, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52))
+            .addComponent(tabbedPaneGUI, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -670,6 +665,7 @@ public class Interface extends javax.swing.JFrame implements MyLog {
                 processImg.setRGB(x, y, cnew.getRGB());
             }
         }
+        JLabel jlab = new JLabel();
         ImageIcon icon = new ImageIcon(ScaledImage(processImg, jSP.getWidth(), jSP.getHeight()));
         jlab.setIcon(icon);
         imgProcSP.getViewport().add(jlab);
@@ -687,6 +683,7 @@ public class Interface extends javax.swing.JFrame implements MyLog {
                 System.out.println(e);
             }
             ImageIcon icon = new ImageIcon(ScaledImage(img, jSP.getWidth(), jSP.getHeight()));
+             JLabel jlab = new JLabel();
             jlab.setIcon(icon);
             //add jLabel to scroll pane
             jSP.getViewport().add(jlab);

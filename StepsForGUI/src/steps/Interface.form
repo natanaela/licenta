@@ -23,11 +23,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-              <Component id="tabbedPaneGUI" min="-2" pref="1042" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-          </Group>
+          <Component id="tabbedPaneGUI" alignment="1" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -57,74 +53,69 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                                  <Component id="step3Run" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="step2Run" alignment="0" min="-2" pref="178" max="-2" attributes="0"/>
-                                                  <Component id="step4Run" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="exportStep4" alignment="1" min="-2" pref="178" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Component id="loadLabesDB" alignment="1" min="-2" pref="178" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="step3Run" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="step2Run" alignment="0" min="-2" pref="178" max="-2" attributes="0"/>
+                                              <Component id="step4Run" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="exportStep4" alignment="1" min="-2" pref="178" max="-2" attributes="0"/>
                                           </Group>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <Component id="hLabel" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="hParam" min="-2" pref="26" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                              <Component id="lLabel" min="-2" pref="14" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="lParam" min="-2" pref="26" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Component id="loadImgButton" min="-2" pref="177" max="-2" attributes="0"/>
-                                          <Component id="step1Run" alignment="1" min="-2" pref="178" max="-2" attributes="0"/>
+                                          <Component id="loadLabesDB" alignment="1" min="-2" pref="178" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="hLabel" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="hParam" min="-2" pref="26" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                          <Component id="lLabel" min="-2" pref="14" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="lParam" min="-2" pref="26" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="loadImgButton" min="-2" pref="177" max="-2" attributes="0"/>
+                                      <Component id="step1Run" alignment="1" min="-2" pref="178" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="1" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
                                       <Component id="threshStep1" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="param" min="-2" pref="40" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                                      <Component id="nrIteratii" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="iteratii" min="-2" pref="40" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                              <Component id="jSP" min="-2" pref="603" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                              <Component id="imgProcSP" min="-2" pref="553" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                              <Component id="nrIteratii" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="iteratii" min="-2" pref="40" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
+                              <Component id="meniuLabel" min="-2" pref="39" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
+                              <Component id="initialImgLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="555" max="-2" attributes="0"/>
+                              <Component id="imgProcLabel" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="379" max="-2" attributes="0"/>
+                              <Component id="rezultatLabel" min="-2" pref="54" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="245" max="-2" attributes="0"/>
+                              <Component id="consolaSP" min="-2" pref="786" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="rezultatLabel" min="-2" pref="54" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="jSP" min="-2" pref="378" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                                  <Component id="imgProcSP" min="-2" pref="378" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="consolaSP" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
-                      <Component id="meniuLabel" min="-2" pref="39" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="233" max="-2" attributes="0"/>
-                      <Component id="initialImgLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="346" max="-2" attributes="0"/>
-                      <Component id="imgProcLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="191" max="-2" attributes="0"/>
+                      <EmptySpace pref="38" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -174,15 +165,16 @@
                               <Component id="exportStep4" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="458" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jSP" pref="375" max="32767" attributes="0"/>
-                                  <Component id="imgProcSP" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jSP" min="-2" pref="546" max="-2" attributes="0"/>
+                                  <Component id="imgProcSP" min="-2" pref="554" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="rezultatLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="consolaSP" min="-2" pref="106" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -373,16 +365,16 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="tabbedPaneParams" min="-2" pref="799" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Component id="loadTestDB" alignment="0" max="32767" attributes="0"/>
-                              <Component id="loadTrainDB" alignment="0" pref="221" max="32767" attributes="0"/>
+                              <Component id="loadTrainDB" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="tabbedPaneParams" alignment="0" min="-2" pref="668" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="363" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="631" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -394,8 +386,8 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="loadTestDB" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="tabbedPaneParams" min="-2" pref="308" max="-2" attributes="0"/>
-                      <EmptySpace pref="405" max="32767" attributes="0"/>
+                      <Component id="tabbedPaneParams" min="-2" pref="427" max="-2" attributes="0"/>
+                      <EmptySpace pref="305" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -439,9 +431,9 @@
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="resultLiniar" min="-2" pref="254" max="-2" attributes="0"/>
-                                  <Component id="liniarSP" min="-2" pref="349" max="-2" attributes="0"/>
+                                  <Component id="liniarSP" min="-2" pref="420" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -462,9 +454,9 @@
                                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                                       <Component id="runLiniarAuto" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="liniarSP" min="-2" pref="149" max="-2" attributes="0"/>
+                                  <Component id="liniarSP" min="-2" pref="321" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
