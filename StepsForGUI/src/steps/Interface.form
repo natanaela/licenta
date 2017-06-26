@@ -58,49 +58,52 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                                      <Component id="nrIteratii" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="iteratii" min="-2" pref="40" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                          <Component id="step1Run" alignment="0" min="-2" pref="178" max="-2" attributes="0"/>
-                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                              <Component id="step3Run" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="step2Run" alignment="0" min="-2" pref="178" max="-2" attributes="0"/>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                                                  <Component id="hLabel" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="hParam" min="-2" pref="26" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                                  <Component id="lLabel" min="-2" pref="14" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="lParam" min="-2" pref="26" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                                  <Component id="step3Run" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="step2Run" alignment="0" min="-2" pref="178" max="-2" attributes="0"/>
+                                                  <Component id="step4Run" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="exportStep4" alignment="1" min="-2" pref="178" max="-2" attributes="0"/>
                                               </Group>
-                                              <Component id="step4Run" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="exportStep4" alignment="1" min="-2" pref="178" max="-2" attributes="0"/>
+                                              <Component id="loadLabesDB" alignment="1" min="-2" pref="178" max="-2" attributes="0"/>
                                           </Group>
-                                          <Component id="loadLabesDB" alignment="1" min="-2" pref="178" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Component id="hLabel" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="hParam" min="-2" pref="26" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                              <Component id="lLabel" min="-2" pref="14" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="lParam" min="-2" pref="26" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="loadImgButton" min="-2" pref="177" max="-2" attributes="0"/>
+                                          <Component id="step1Run" alignment="1" min="-2" pref="178" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="loadImgButton" alignment="1" min="-2" pref="177" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="threshStep1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="param" min="-2" pref="40" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
-                              <Component id="PragStep1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                              <Component id="parametru" min="-2" pref="40" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="nrIteratii" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="iteratii" min="-2" pref="40" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="rezultatLabel" min="-2" pref="54" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -139,35 +142,37 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="loadImgButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="step1Run" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="parametru" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="PragStep1" alignment="3" max="32767" attributes="0"/>
+                                  <Component id="param" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="threshStep1" alignment="3" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="step2Run" min="-2" max="-2" attributes="0"/>
+                              <Component id="step1Run" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="nrIteratii" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                                   <Component id="iteratii" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="step2Run" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="step3Run" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="loadLabesDB" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                      <Component id="hLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="hParam" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="lParam" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="step4Run" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="hLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="hParam" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lParam" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="exportStep4" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="329" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="458" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -178,7 +183,6 @@
                               <Component id="rezultatLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="consolaSP" min="-2" pref="106" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -202,17 +206,17 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="step1RunActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="PragStep1">
+            <Component class="javax.swing.JLabel" name="threshStep1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Prag :"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="parametru">
+            <Component class="javax.swing.JTextField" name="param">
               <Properties>
                 <Property name="text" type="java.lang.String" value="50"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="parametruActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="paramActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="meniuLabel">
@@ -265,7 +269,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="exportStep4">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Export train/test files"/>
+                <Property name="text" type="java.lang.String" value="Export fisiere train/test"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
@@ -391,7 +395,7 @@
                       <Component id="loadTestDB" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="tabbedPaneParams" min="-2" pref="308" max="-2" attributes="0"/>
-                      <EmptySpace pref="283" max="32767" attributes="0"/>
+                      <EmptySpace pref="405" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -434,7 +438,7 @@
                               </Group>
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="rezultatLiniar" min="-2" pref="254" max="-2" attributes="0"/>
+                                  <Component id="resultLiniar" min="-2" pref="254" max="-2" attributes="0"/>
                                   <Component id="liniarSP" min="-2" pref="349" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
@@ -445,7 +449,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                              <Component id="rezultatLiniar" min="-2" max="-2" attributes="0"/>
+                              <Component id="resultLiniar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
@@ -496,13 +500,13 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="runLiniarAuto">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Cauta automat parametrii"/>
+                        <Property name="text" type="java.lang.String" value="Cauta automat parametrul"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="runLiniarAutoActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="rezultatLiniar">
+                    <Component class="javax.swing.JLabel" name="resultLiniar">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="In urma parametrilor introdusi rezultatele sunt:"/>
                       </Properties>
@@ -564,7 +568,7 @@
                               </Group>
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="rezultatRBF" min="-2" pref="254" max="-2" attributes="0"/>
+                                  <Component id="resultRBF" min="-2" pref="254" max="-2" attributes="0"/>
                                   <Component id="rbfSP" min="-2" pref="349" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
@@ -575,7 +579,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                              <Component id="rezultatRBF" min="-2" max="-2" attributes="0"/>
+                              <Component id="resultRBF" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
@@ -631,7 +635,7 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cRbfParamActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="rezultatRBF">
+                    <Component class="javax.swing.JLabel" name="resultRBF">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="In urma parametrilor introdusi rezultatele sunt:"/>
                       </Properties>
