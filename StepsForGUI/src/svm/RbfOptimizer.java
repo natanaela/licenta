@@ -31,7 +31,8 @@ public class RbfOptimizer {
         double maxAcuratete = 0;
         double cOptim = 0;
         double gammaOptim = 0;
-
+        LoadingLIBSVM.ResultAcurateteAndConfuzie rezultatOptim = new LoadingLIBSVM.ResultAcurateteAndConfuzie();
+        svm_model modelOptim = new svm_model();
         for (int i = 0; i < cValues.length; i++) {
             for (int j = 0; j < gammaValues.length; j++) {
                 double C = Math.pow(2, cValues[i]);
@@ -41,15 +42,17 @@ public class RbfOptimizer {
                 svm_model model = svm.svm_train(problem, params); // scoatem un model din problema=trainData si parametri=parametriModel
                 LoadingLIBSVM.ResultAcurateteAndConfuzie rezultat = LoadingLIBSVM.testModelForTestFile(model, testFileData); // returnaza cate labeluri au fost corect gasite
                 acuratete = rezultat.acuratete;
-                //System.out.println("***************************** c=" + C + " gamma=" + gamma + " acuratete=" + acuratete*100 + "% ***************************");
+                modelOptim = model;
                 if (acuratete > maxAcuratete) {
                     maxAcuratete = acuratete;
                     cOptim = C;
                     gammaOptim = gamma;
+                    rezultatOptim = rezultat;
                 }
             }
         }
-        outputString.append("cOptim=" + cOptim + "\ngamaOptim=" + gammaOptim + "\nAcuratete=" + maxAcuratete * 100 + "%\n");
+        outputString.append("cOptim=" + cOptim + "\ngammaOptim=" + gammaOptim + "\nAcuratete=" + maxAcuratete * 100 + "%"  + "\nnSV= " + suma(modelOptim.nSV)+"%\n");
+        outputString.append("Matricea confuzie:\n" + parseMatrixToString(rezultatOptim.confuzie));
         return getSvmParameters(cOptim, gammaOptim);
     }
 
@@ -57,7 +60,8 @@ public class RbfOptimizer {
         svm_parameter params = getSvmParameters(C, gamma); //crearea parametrilor
         svm_model model = svm.svm_train(problem, params); // scoatem un model din problema=trainData si parametri=parametriModel
         LoadingLIBSVM.ResultAcurateteAndConfuzie rezultat = LoadingLIBSVM.testModelForTestFile(model, testFileData); // returnaza cate labeluri au fost corect gasite
-        outputString.append("C=" + C + "\ngamma=" + gamma + "\nAcuratete=" + rezultat.acuratete * 100 + "%\n");
+        outputString.append("C=" + C + "\ngamma=" + gamma + "\nAcuratete=" + rezultat.acuratete * 100 + "%" + "%\nnSV=" + suma(model.nSV) + "%\n");
+        outputString.append("Matricea confuzie:\n" + parseMatrixToString(rezultat.confuzie) + "\n");
         return getSvmParameters(C, gamma);
     }
 
@@ -70,5 +74,23 @@ public class RbfOptimizer {
         toReturn.eps = 0.001;
         return toReturn;
     }
-
+    
+    private static String parseMatrixToString(int[][] confuzie) {
+        StringBuilder toReturn = new StringBuilder();
+        for (int row = 0; row < confuzie.length; row++) {
+            for (int col = 0; col < confuzie[0].length; col++) {
+                toReturn.append(confuzie[row][col] + "  ");
+            }
+            toReturn.append("\n");
+        }
+        return toReturn.toString();
+    }
+    
+    private static int suma(int[] nSV) {
+        int toReturn = 0;
+        for (int i : nSV) {
+            toReturn += i;
+        }
+        return toReturn;
+    }
 }

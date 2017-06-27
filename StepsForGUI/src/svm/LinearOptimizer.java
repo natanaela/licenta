@@ -38,18 +38,15 @@ public class LinearOptimizer {
             svm_model model = svm.svm_train(problem, params); // scoatem un model din problema=trainData si parametri=parametriModel
             LoadingLIBSVM.ResultAcurateteAndConfuzie rezultat = LoadingLIBSVM.testModelForTestFile(model, testFileData);
             acuratete = rezultat.acuratete;
-            //System.out.println("***************************** c=" + C + " acuratete=" + acuratete + "***************************");
+            modelOptim = model;
             if (acuratete > maxAcuratete) {
                 maxAcuratete = acuratete;
                 cOptim = C;
                 rezultatOptim = rezultat;
-                modelOptim = model;
             }
         }
-        //System.out.println("=========================== cOptim=" + cOptim +"==========================================================");
-        outputString.append("cOptim=" + cOptim + "\nAcuratete=" + maxAcuratete * 100 + "%\n");
+        outputString.append("cOptim=" + cOptim + "\nAcuratete=" + maxAcuratete * 100 + "%" + "\nnSV= " + suma(modelOptim.nSV)+"%\n");
         outputString.append("Matricea confuzie:\n" + parseMatrixToString(rezultatOptim.confuzie));
-//        outputString.append("nSV= " + suma(modelOptim.nSV));
         return getSvmParameters(cOptim);
     }
 
@@ -57,9 +54,8 @@ public class LinearOptimizer {
         svm_parameter params = getSvmParameters(C); //crearea parametrilor
         svm_model model = svm.svm_train(problem, params); // scoatem un model din problema=trainData si parametri=parametriModel
         LoadingLIBSVM.ResultAcurateteAndConfuzie rezultat = LoadingLIBSVM.testModelForTestFile(model, testFileData); // returnaza cate labeluri au fost corect gasite
-        outputString.append("C=" + C + "\nAcuratete=" + rezultat.acuratete * 100 + "%\n");
-        outputString.append("Matricea confuzie:\n" + parseMatrixToString(rezultat.confuzie));
-//        outputString.append("nSV= " + suma(model.nSV));
+        outputString.append("C=" + C + "\nAcuratete=" + rezultat.acuratete * 100 + "%" + "\nnSV= " + suma(model.nSV) + "%\n");
+        outputString.append("Matricea confuzie:\n" + parseMatrixToString(rezultat.confuzie) + "\n");
         return getSvmParameters(C);
     }
 

@@ -6,12 +6,14 @@
 package steps;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -33,8 +35,6 @@ public class Interface extends javax.swing.JFrame implements MyLog {
     private double[][] step2Result = new double[1][1]; // prima dimensiune este indicele coloana
     private double[][] step3Result = new double[1][1]; // prima dimensiune este indicele rand
     private Step4.Result step4Result = null;
-    private JPanel rbfParamPanel = new JPanel();
-    private JPanel liniarParamPanel = new JPanel();
     private String trainFile;
     private String testFile;
     private String labelsFile;
@@ -220,6 +220,13 @@ public class Interface extends javax.swing.JFrame implements MyLog {
             .addGroup(panelStepsLayout.createSequentialGroup()
                 .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelStepsLayout.createSequentialGroup()
+                        .addGap(101, 101, 101)
+                        .addComponent(meniuLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(92, 92, 92)
+                        .addComponent(initialImgLabel)
+                        .addGap(555, 555, 555)
+                        .addComponent(imgProcLabel))
+                    .addGroup(panelStepsLayout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -242,32 +249,24 @@ public class Interface extends javax.swing.JFrame implements MyLog {
                                 .addComponent(loadImgButton, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(step1Run, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panelStepsLayout.createSequentialGroup()
-                                .addComponent(threshStep1)
-                                .addGap(18, 18, 18)
-                                .addComponent(param, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelStepsLayout.createSequentialGroup()
                                 .addGap(19, 19, 19)
                                 .addComponent(nrIteratii)
                                 .addGap(18, 18, 18)
-                                .addComponent(iteratii, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(iteratii, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelStepsLayout.createSequentialGroup()
+                                .addComponent(threshStep1)
+                                .addGap(18, 18, 18)
+                                .addComponent(param, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(38, 38, 38)))
                         .addGap(12, 12, 12)
-                        .addComponent(jSP, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(imgProcSP, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelStepsLayout.createSequentialGroup()
-                        .addGap(101, 101, 101)
-                        .addComponent(meniuLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(92, 92, 92)
-                        .addComponent(initialImgLabel)
-                        .addGap(555, 555, 555)
-                        .addComponent(imgProcLabel))
-                    .addGroup(panelStepsLayout.createSequentialGroup()
-                        .addGap(379, 379, 379)
-                        .addComponent(rezultatLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelStepsLayout.createSequentialGroup()
-                        .addGap(245, 245, 245)
-                        .addComponent(consolaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                        .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rezultatLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelStepsLayout.createSequentialGroup()
+                                .addComponent(jSP, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(imgProcSP, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(consolaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
         panelStepsLayout.setVerticalGroup(
             panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -310,13 +309,13 @@ public class Interface extends javax.swing.JFrame implements MyLog {
                         .addComponent(exportStep4)
                         .addGap(458, 458, 458))
                     .addGroup(panelStepsLayout.createSequentialGroup()
-                        .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSP, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(imgProcSP, javax.swing.GroupLayout.PREFERRED_SIZE, 554, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(imgProcSP, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
+                            .addComponent(jSP))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(rezultatLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(consolaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(consolaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -467,8 +466,8 @@ public class Interface extends javax.swing.JFrame implements MyLog {
                 .addGap(30, 30, 30)
                 .addGroup(panelRbfSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(resultRBF, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rbfSP, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(119, 119, 119))
+                    .addComponent(rbfSP, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         panelRbfSVMLayout.setVerticalGroup(
             panelRbfSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -489,8 +488,7 @@ public class Interface extends javax.swing.JFrame implements MyLog {
                         .addComponent(runRBF)
                         .addGap(18, 18, 18)
                         .addComponent(runRBFAuto))
-                    .addComponent(rbfSP, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(82, 82, 82))
+                    .addComponent(rbfSP, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         tabbedPaneParams.addTab("RBF", null, panelRbfSVM, "");
@@ -520,7 +518,7 @@ public class Interface extends javax.swing.JFrame implements MyLog {
                     .addGroup(panelSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(loadTestDB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(loadTrainDB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(0, 631, Short.MAX_VALUE))
+                .addGap(0, 503, Short.MAX_VALUE))
         );
         panelSVMLayout.setVerticalGroup(
             panelSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -531,7 +529,7 @@ public class Interface extends javax.swing.JFrame implements MyLog {
                 .addComponent(loadTestDB)
                 .addGap(18, 18, 18)
                 .addComponent(tabbedPaneParams, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(305, Short.MAX_VALUE))
+                .addContainerGap(186, Short.MAX_VALUE))
         );
 
         tabbedPaneGUI.addTab("Clasificator SVM", null, panelSVM, "");
@@ -544,9 +542,10 @@ public class Interface extends javax.swing.JFrame implements MyLog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(tabbedPaneGUI))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tabbedPaneGUI, javax.swing.GroupLayout.PREFERRED_SIZE, 745, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -558,13 +557,14 @@ public class Interface extends javax.swing.JFrame implements MyLog {
 
     private void exportStep4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportStep4ActionPerformed
         double ratio = 5 / 8.0;
+        //JFileChooser jfc = new JFileChooser(Paths.get(".").toAbsolutePath().normalize().toFile());
         JFileChooser jfc = new JFileChooser();
         jfc.setDialogTitle("Salveaza baza de date train");
-        jfc.setSelectedFile(new File("trainJava.txt"));
+        jfc.setSelectedFile(new File("train.txt"));
         if (jfc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
             File fTrain = jfc.getSelectedFile();
             jfc.setDialogTitle("Salveaza baza de date test");
-            jfc.setSelectedFile(new File("testJava.txt"));
+            jfc.setSelectedFile(new File("test.txt"));
             if (jfc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
                 File fTest = jfc.getSelectedFile();
                 saveTrainTestFile(step4Result, ratio, fTrain, fTest);
@@ -574,6 +574,7 @@ public class Interface extends javax.swing.JFrame implements MyLog {
 
     private void step4RunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_step4RunActionPerformed
         try{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             long startTime, stopTime, delta;
             startTime = System.currentTimeMillis();
             int h = Integer.parseInt(hParam.getText());
@@ -588,10 +589,14 @@ public class Interface extends javax.swing.JFrame implements MyLog {
        catch(Exception e){
            consola.append(e.getMessage() + "\n");
        }
+        finally {
+            this.setCursor(Cursor.getDefaultCursor());
+        }
     }//GEN-LAST:event_step4RunActionPerformed
 
     private void step3RunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_step3RunActionPerformed
         try{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             long startTime, stopTime, delta;
             startTime = System.currentTimeMillis();
             step3Result = Step3.run(step2Result);
@@ -604,6 +609,9 @@ public class Interface extends javax.swing.JFrame implements MyLog {
        catch(Exception e){
            consola.append(e.getMessage() + "\n");
        }
+        finally {
+            this.setCursor(Cursor.getDefaultCursor());
+        }
     }//GEN-LAST:event_step3RunActionPerformed
 
     private void iteratiiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iteratiiActionPerformed
@@ -612,6 +620,7 @@ public class Interface extends javax.swing.JFrame implements MyLog {
 
     private void step2RunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_step2RunActionPerformed
         try{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             long startTime, stopTime, delta;
             startTime = System.currentTimeMillis();
             int iteratie = Integer.parseInt(iteratii.getText());
@@ -639,6 +648,9 @@ public class Interface extends javax.swing.JFrame implements MyLog {
        catch(Exception e){
            consola.append(e.getMessage() + "\n");
        }
+        finally {
+            this.setCursor(Cursor.getDefaultCursor());
+        }
     }//GEN-LAST:event_step2RunActionPerformed
 
     private void paramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paramActionPerformed
@@ -646,13 +658,13 @@ public class Interface extends javax.swing.JFrame implements MyLog {
     }//GEN-LAST:event_paramActionPerformed
 
     private void step1RunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_step1RunActionPerformed
-        int width = 850;
-        int height = 900;
-//        int width = img.getWidth();
-//        int height = img.getHeight();
+//        int width = 850;
+//        int height = 900;
+        int width = img.getWidth();
+        int height = img.getHeight();
         processImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-        processImg.setData(img.getSubimage(248, 0, width, height).getRaster());
-       // processImg.setData(img.getData());        
+//        processImg.setData(img.getSubimage(248, 0, width, height).getRaster());
+        processImg.setData(img.getData());        
         int thresh = Integer.parseInt(param.getText());
         imgBW = new double[height][width];
         for (int y = 0; y < height; y++) {
@@ -672,8 +684,9 @@ public class Interface extends javax.swing.JFrame implements MyLog {
     }//GEN-LAST:event_step1RunActionPerformed
 
     private void loadImgButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadImgButtonActionPerformed
+        //JFileChooser jfc = new JFileChooser(Paths.get(".").toAbsolutePath().normalize().toFile());
         JFileChooser jfc = new JFileChooser();
-        jfc.setSelectedFile(new File("PICT0001.JPG"));
+        jfc.setSelectedFile(new File("PICT0001_croped.JPG"));
         if (jfc.showOpenDialog(loadImgButton) == JFileChooser.APPROVE_OPTION) {
             img = null;
             try {
@@ -707,9 +720,10 @@ public class Interface extends javax.swing.JFrame implements MyLog {
     }//GEN-LAST:event_cLiniarParamActionPerformed
 
     private void loadTrainDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadTrainDBActionPerformed
+        //JFileChooser jfc = new JFileChooser(Paths.get(".").toAbsolutePath().normalize().toFile());
         JFileChooser jfc = new JFileChooser();
         jfc.setDialogTitle("Incarca baza de date train");
-        jfc.setSelectedFile(new File("trainJava.txt"));
+        jfc.setSelectedFile(new File("train.txt"));
         int train = jfc.showOpenDialog(null);
          if (train== JFileChooser.APPROVE_OPTION) 
         {
@@ -719,9 +733,10 @@ public class Interface extends javax.swing.JFrame implements MyLog {
     }//GEN-LAST:event_loadTrainDBActionPerformed
 
     private void loadTestDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadTestDBActionPerformed
+        //JFileChooser jfc = new JFileChooser(Paths.get(".").toAbsolutePath().normalize().toFile());
         JFileChooser jfc = new JFileChooser();
         jfc.setDialogTitle("Incarca baza de date test");
-        jfc.setSelectedFile(new File("testJava.txt"));
+        jfc.setSelectedFile(new File("test.txt"));
         int test = jfc.showOpenDialog(null);
          if (test== JFileChooser.APPROVE_OPTION) 
         {
@@ -732,71 +747,92 @@ public class Interface extends javax.swing.JFrame implements MyLog {
 
     private void runRBFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runRBFActionPerformed
        try{
-        long startTime, stopTime, delta;
-        startTime = System.currentTimeMillis();
-        svm_problem problem = LoadingLIBSVM.getProblemFromTrainingDataFile(trainFile);
-        stopTime = System.currentTimeMillis();
-        delta = (stopTime - startTime);
-        consolaRBF.append("Problema, folosind baza de train, a fost calculata in " + delta + " ms\n");
-        svm_parameter params = RbfOptimizer.getParamsForTestFile(problem, testFile, Double.parseDouble(cRbfParam.getText()),Double.parseDouble(gammaRbfParam.getText()), consolaRBF);
-        consolaRBF.append("\n");
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            long startTime, stopTime, delta;
+            startTime = System.currentTimeMillis();
+            svm_problem problem = LoadingLIBSVM.getProblemFromTrainingDataFile(trainFile);
+            stopTime = System.currentTimeMillis();
+            delta = (stopTime - startTime);
+            consolaRBF.append("Problema, folosind baza de train, a fost calculata in " + delta + " ms\n");
+            svm_parameter params = RbfOptimizer.getParamsForTestFile(problem, testFile, Double.parseDouble(cRbfParam.getText()),Double.parseDouble(gammaRbfParam.getText()), consolaRBF);
+            consolaRBF.append("\n");
        }
        catch(Exception e){
            consolaRBF.append(e.getMessage() + "\n");
        }
+        finally {
+            this.setCursor(Cursor.getDefaultCursor());
+        }
     }//GEN-LAST:event_runRBFActionPerformed
 
     private void runRBFAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runRBFAutoActionPerformed
         try{
-        consolaRBF.append("Parametrii optimizati\n");
-        long startTime, stopTime, delta;
-        startTime = System.currentTimeMillis();
-        svm_problem problem = LoadingLIBSVM.getProblemFromTrainingDataFile(trainFile);
-        stopTime = System.currentTimeMillis();
-        delta = (stopTime - startTime);
-        consolaRBF.append("Problema, folosind baza de train, a fost calculata in " + delta + " ms\n");
-        svm_parameter params = RbfOptimizer.getOptimsForTestFile(problem, testFile ,consolaRBF); // luam parametrii cu acuratetea maxima
-        delta = System.currentTimeMillis() - stopTime;
-        consolaRBF.append("Parametrii optimi, folosind baza de test, au fost calculati in " + delta + " ms\n");
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            consolaRBF.append("Parametrii optimizati\n");
+            long startTime, stopTime, delta;
+            startTime = System.currentTimeMillis();
+            svm_problem problem = LoadingLIBSVM.getProblemFromTrainingDataFile(trainFile);
+            stopTime = System.currentTimeMillis();
+            delta = (stopTime - startTime);
+            consolaRBF.append("Problema, folosind baza de train, a fost calculata in " + delta + " ms\n");
+            svm_parameter params = RbfOptimizer.getOptimsForTestFile(problem, testFile ,consolaRBF); // luam parametrii cu acuratetea maxima
+            delta = System.currentTimeMillis() - stopTime;
+            consolaRBF.append("Parametrii optimi, folosind baza de test, au fost calculati in " + delta + " ms\n");
+            consolaRBF.append("\n");
         }
         catch(Exception e){
            consolaRBF.append(e.getMessage() + "\n");
+        }
+        finally {
+            this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_runRBFAutoActionPerformed
 
     private void runLiniarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runLiniarActionPerformed
         try{
-        long startTime, stopTime, delta;
-        startTime = System.currentTimeMillis();
-        svm_problem problem = LoadingLIBSVM.getProblemFromTrainingDataFile(trainFile);
-        stopTime = System.currentTimeMillis();
-        delta = (stopTime - startTime);
-        consolaLiniar.append("Problema, folosind baza de train, a fost calculata in " + delta + " ms\n");
-        svm_parameter params = LinearOptimizer.getParamsForTestFile(problem, testFile, Double.parseDouble(cLiniarParam.getText()), consolaLiniar);
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            long startTime, stopTime, delta;
+            startTime = System.currentTimeMillis();
+            svm_problem problem = LoadingLIBSVM.getProblemFromTrainingDataFile(trainFile);
+            stopTime = System.currentTimeMillis();
+            delta = (stopTime - startTime);
+            consolaLiniar.append("Problema, folosind baza de train, a fost calculata in " + delta + " ms\n");
+            svm_parameter params = LinearOptimizer.getParamsForTestFile(problem, testFile, Double.parseDouble(cLiniarParam.getText()), consolaLiniar);
+            consolaLiniar.append("\n");
         }
        catch(Exception e){
            consolaLiniar.append(e.getMessage() + "\n");
        }
+        finally {
+            this.setCursor(Cursor.getDefaultCursor());
+        }
     }//GEN-LAST:event_runLiniarActionPerformed
 
     private void runLiniarAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runLiniarAutoActionPerformed
        try{
-        consolaLiniar.append("Parametrii optimizati\n");
-        long startTime, stopTime, delta;
-        startTime = System.currentTimeMillis();
-        svm_problem problem = LoadingLIBSVM.getProblemFromTrainingDataFile(trainFile);
-        stopTime = System.currentTimeMillis();
-        delta = (stopTime - startTime);
-        consolaLiniar.append("Problema, folosind baza de train, a fost calculata in " + delta + " ms\n");
-        svm_parameter params = LinearOptimizer.getOptimsForTestFile(problem, testFile ,consolaLiniar); // luam parametrii cu acuratetea maxima
-        delta = System.currentTimeMillis() - stopTime;
-        consolaLiniar.append("Parametrul optim, folosind baza de test, a fost calculat in " + delta + " ms\n");  }
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            consolaLiniar.append("Parametrii optimizati\n");
+            long startTime, stopTime, delta;
+            startTime = System.currentTimeMillis();
+            svm_problem problem = LoadingLIBSVM.getProblemFromTrainingDataFile(trainFile);
+            stopTime = System.currentTimeMillis();
+            delta = (stopTime - startTime);
+            consolaLiniar.append("Problema, folosind baza de train, a fost calculata in " + delta + " ms\n");
+            svm_parameter params = LinearOptimizer.getOptimsForTestFile(problem, testFile ,consolaLiniar); // luam parametrii cu acuratetea maxima
+            delta = System.currentTimeMillis() - stopTime;
+            consolaLiniar.append("Parametrul optim, folosind baza de test, a fost calculat in " + delta + " ms\n"); 
+            consolaLiniar.append("\n");
+        }
         catch(Exception e){
            consolaLiniar.append(e.getMessage() + "\n");
+        }
+        finally {
+            this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_runLiniarAutoActionPerformed
 
     private void loadLabesDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadLabesDBActionPerformed
+        //JFileChooser jfc = new JFileChooser(Paths.get(".").toAbsolutePath().normalize().toFile());
         JFileChooser jfc = new JFileChooser();
         jfc.setDialogTitle("Incarca baza de date bruta");
         jfc.setSelectedFile(new File("etichete.txt"));
@@ -847,7 +883,7 @@ public class Interface extends javax.swing.JFrame implements MyLog {
         }
         //</editor-fold>
         Interface myFrame = new Interface();
-        myFrame.setTitle("SVM");
+        myFrame.setTitle("Recunoasterea cifrelor cu ajutorul clasificatorului SVM");
         Utils.log = myFrame;
 //        Utils.log = new ConsoleLog();
         java.awt.EventQueue.invokeLater(new Runnable() {
