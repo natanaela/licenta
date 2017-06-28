@@ -14,6 +14,7 @@ import java.awt.Cursor;
  * @author tudor
  */
 public class MyMouseListener implements MouseListener{
+    public double scalareX, scalareY;
     boolean startCroping = false;
     int leftUpX, leftUpY, downRightX, downRightY;
     boolean firtstCornerSelected = false;
@@ -25,13 +26,13 @@ public class MyMouseListener implements MouseListener{
         if (startCroping){
 
             if (firtstCornerSelected == false){
-                leftUpX = e.getX();
-                leftUpY = e.getY();
+                leftUpX = (int)(e.getX() / scalareX);
+                leftUpY = (int)(e.getY() / scalareY);
                 firtstCornerSelected = true;
             }
             else{
-                downRightX = e.getX();
-                downRightY = e.getY();
+                downRightX = (int)(e.getX()/ scalareX);
+                downRightY = (int)(e.getY()/ scalareY);
                 firtstCornerSelected = false;
                 startCroping = false;
                 referintaInterfata.setJSPMouseCursor(Cursor.DEFAULT_CURSOR);

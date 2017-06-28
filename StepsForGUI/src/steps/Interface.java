@@ -41,6 +41,7 @@ public class Interface extends javax.swing.JFrame implements MyLog {
     private String testFile;
     private String labelsFile;
     private MyMouseListener ml = new MyMouseListener();
+    private String lastFolder = "/"; // folder proiect
 
     /**
      * Creates new form importImage
@@ -73,10 +74,7 @@ public class Interface extends javax.swing.JFrame implements MyLog {
         step3Run = new javax.swing.JButton();
         step4Run = new javax.swing.JButton();
         exportStep4 = new javax.swing.JButton();
-        jSP = new javax.swing.JScrollPane();
-        panouIMG = new steps.MyPanel();
         initialImgLabel = new javax.swing.JLabel();
-        imgProcSP = new javax.swing.JScrollPane();
         imgProcLabel = new javax.swing.JLabel();
         consolaSP = new javax.swing.JScrollPane();
         consola = new javax.swing.JTextArea();
@@ -87,6 +85,8 @@ public class Interface extends javax.swing.JFrame implements MyLog {
         lParam = new javax.swing.JTextField();
         loadLabesDB = new javax.swing.JButton();
         crop = new javax.swing.JButton();
+        panouIMG = new steps.MyPanel();
+        panouIMGdreapta = new steps.MyPanel();
         panelSVM = new javax.swing.JPanel();
         tabbedPaneParams = new javax.swing.JTabbedPane();
         panelLiniarSVM = new javax.swing.JPanel();
@@ -179,30 +179,8 @@ public class Interface extends javax.swing.JFrame implements MyLog {
             }
         });
 
-        jSP.setForeground(new java.awt.Color(255, 255, 255));
-        jSP.setMinimumSize(new java.awt.Dimension(0, 0));
-        jSP.setPreferredSize(new java.awt.Dimension(0, 0));
-
-        panouIMG.setPreferredSize(new java.awt.Dimension(490, 450));
-
-        javax.swing.GroupLayout panouIMGLayout = new javax.swing.GroupLayout(panouIMG);
-        panouIMG.setLayout(panouIMGLayout);
-        panouIMGLayout.setHorizontalGroup(
-            panouIMGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 490, Short.MAX_VALUE)
-        );
-        panouIMGLayout.setVerticalGroup(
-            panouIMGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
-        );
-
-        jSP.setViewportView(panouIMG);
-
         initialImgLabel.setForeground(new java.awt.Color(0, 51, 255));
         initialImgLabel.setText("Poza initiala");
-
-        imgProcSP.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        imgProcSP.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         imgProcLabel.setForeground(new java.awt.Color(0, 51, 255));
         imgProcLabel.setText("Poza prelucrata");
@@ -250,6 +228,34 @@ public class Interface extends javax.swing.JFrame implements MyLog {
             }
         });
 
+        panouIMG.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panouIMG.setPreferredSize(new java.awt.Dimension(490, 450));
+
+        javax.swing.GroupLayout panouIMGLayout = new javax.swing.GroupLayout(panouIMG);
+        panouIMG.setLayout(panouIMGLayout);
+        panouIMGLayout.setHorizontalGroup(
+            panouIMGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 488, Short.MAX_VALUE)
+        );
+        panouIMGLayout.setVerticalGroup(
+            panouIMGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 448, Short.MAX_VALUE)
+        );
+
+        panouIMGdreapta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panouIMGdreapta.setPreferredSize(new java.awt.Dimension(490, 450));
+
+        javax.swing.GroupLayout panouIMGdreaptaLayout = new javax.swing.GroupLayout(panouIMGdreapta);
+        panouIMGdreapta.setLayout(panouIMGdreaptaLayout);
+        panouIMGdreaptaLayout.setHorizontalGroup(
+            panouIMGdreaptaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 488, Short.MAX_VALUE)
+        );
+        panouIMGdreaptaLayout.setVerticalGroup(
+            panouIMGdreaptaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 448, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout panelStepsLayout = new javax.swing.GroupLayout(panelSteps);
         panelSteps.setLayout(panelStepsLayout);
         panelStepsLayout.setHorizontalGroup(
@@ -263,6 +269,9 @@ public class Interface extends javax.swing.JFrame implements MyLog {
                         .addComponent(initialImgLabel)
                         .addGap(386, 386, 386)
                         .addComponent(imgProcLabel))
+                    .addGroup(panelStepsLayout.createSequentialGroup()
+                        .addGap(220, 220, 220)
+                        .addComponent(rezultatLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelStepsLayout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,13 +309,12 @@ public class Interface extends javax.swing.JFrame implements MyLog {
                                         .addComponent(param, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rezultatLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(consolaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelStepsLayout.createSequentialGroup()
-                                .addComponent(jSP, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(panouIMG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(imgProcSP, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(544, 544, 544))
+                                .addComponent(panouIMGdreapta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(528, Short.MAX_VALUE))
         );
         panelStepsLayout.setVerticalGroup(
             panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -353,16 +361,16 @@ public class Interface extends javax.swing.JFrame implements MyLog {
                         .addComponent(step4Run)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(exportStep4)
-                        .addGap(438, 438, 438))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelStepsLayout.createSequentialGroup()
                         .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(imgProcSP, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSP, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(13, 13, 13)
+                            .addComponent(panouIMG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(panouIMGdreapta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addComponent(rezultatLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(consolaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(463, Short.MAX_VALUE))))
         );
 
         tabbedPaneGUI.addTab("Prelucrare Pasi", null, panelSteps, "");
@@ -604,7 +612,7 @@ public class Interface extends javax.swing.JFrame implements MyLog {
     private void exportStep4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportStep4ActionPerformed
         double ratio = 5 / 8.0;
         //JFileChooser jfc = new JFileChooser(Paths.get(".").toAbsolutePath().normalize().toFile());
-        JFileChooser jfc = new JFileChooser();
+        JFileChooser jfc = new JFileChooser(lastFolder);
         jfc.setDialogTitle("Salveaza baza de date train");
         jfc.setSelectedFile(new File("train.txt"));
         if (jfc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
@@ -614,6 +622,7 @@ public class Interface extends javax.swing.JFrame implements MyLog {
             if (jfc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
                 File fTest = jfc.getSelectedFile();
                 saveTrainTestFile(step4Result, ratio, fTrain, fTest);
+                lastFolder = fTest.getParent();
             }
         }
     }//GEN-LAST:event_exportStep4ActionPerformed
@@ -682,11 +691,8 @@ public class Interface extends javax.swing.JFrame implements MyLog {
                     imgToSHow.setRGB(col, row, cnew.getRGB());
                 }
             }
-            ImageIcon icon = new ImageIcon(ScaledImage(imgToSHow, imgProcSP.getWidth(), imgProcSP.getHeight()));
-             JLabel jlab = new JLabel();
-            jlab.setIcon(icon);
-            imgProcSP.getViewport().add(jlab);
             step3Run.setEnabled(true);
+            showProcessedImgDreapta(imgToSHow);
         } catch (Exception e) {
             consola.append(e.getMessage() + "\n");
         } finally {
@@ -702,8 +708,6 @@ public class Interface extends javax.swing.JFrame implements MyLog {
 
         int width = processImg.getWidth();
         int height = processImg.getHeight();
-//        processImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-//        processImg.setData(img.getData());
         int thresh = Integer.parseInt(param.getText());
         imgBW = new double[height][width];
          BufferedImage imgToSHow = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -717,35 +721,36 @@ public class Interface extends javax.swing.JFrame implements MyLog {
                 imgToSHow.setRGB(x, y, cnew.getRGB());
             }
         }
-        JLabel jlab = new JLabel();
-        ImageIcon icon = new ImageIcon(ScaledImage(imgToSHow, imgProcSP.getWidth(), imgProcSP.getHeight()));
-        jlab.setIcon(icon);
-        imgProcSP.getViewport().add(jlab);
+           showProcessedImgDreapta(imgToSHow);
     }//GEN-LAST:event_step1RunActionPerformed
 
     private void loadImgButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadImgButtonActionPerformed
         //JFileChooser jfc = new JFileChooser(Paths.get(".").toAbsolutePath().normalize().toFile());
-        JFileChooser jfc = new JFileChooser();
+        JFileChooser jfc = new JFileChooser(lastFolder);
         jfc.setSelectedFile(new File("PICT0001_croped.JPG"));
         if (jfc.showOpenDialog(loadImgButton) == JFileChooser.APPROVE_OPTION) {
             img = null;
             try {
                 java.io.File f = jfc.getSelectedFile();
                 img = ImageIO.read(f);
+                lastFolder = f.getParent();
             } catch (IOException e) {
                 System.out.println(e);
             }
             processImg = img;
             showProcessedImg(processImg);
-
         }
     }//GEN-LAST:event_loadImgButtonActionPerformed
 
     private void showProcessedImg(BufferedImage img) {
-        ImageIcon icon = new ImageIcon(ScaledImage(img, img.getWidth(), img.getHeight()));
-        panouIMG.setPreferredSize(new Dimension(img.getWidth(), img.getHeight()));
-        panouIMG.setImg(icon);
+        panouIMG.setImg(img);
+        ml.scalareX = panouIMG.scalareX;
+        ml.scalareY = panouIMG.scalareY;
         panouIMG.repaint();
+    }
+    private void showProcessedImgDreapta(BufferedImage img) {
+        panouIMGdreapta.setImg(img);
+        panouIMGdreapta.repaint();
     }
     private void cRbfParamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cRbfParamActionPerformed
         // TODO add your handling code here:
@@ -765,25 +770,27 @@ public class Interface extends javax.swing.JFrame implements MyLog {
 
     private void loadTrainDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadTrainDBActionPerformed
         //JFileChooser jfc = new JFileChooser(Paths.get(".").toAbsolutePath().normalize().toFile());
-        JFileChooser jfc = new JFileChooser();
+        JFileChooser jfc = new JFileChooser(lastFolder);
         jfc.setDialogTitle("Incarca baza de date train");
         jfc.setSelectedFile(new File("train.txt"));
         int train = jfc.showOpenDialog(null);
         if (train == JFileChooser.APPROVE_OPTION) {
             File file = jfc.getSelectedFile();
             trainFile = file.getAbsolutePath();
+            lastFolder = file.getParent();
         }
     }//GEN-LAST:event_loadTrainDBActionPerformed
 
     private void loadTestDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadTestDBActionPerformed
         //JFileChooser jfc = new JFileChooser(Paths.get(".").toAbsolutePath().normalize().toFile());
-        JFileChooser jfc = new JFileChooser();
+        JFileChooser jfc = new JFileChooser(lastFolder);
         jfc.setDialogTitle("Incarca baza de date test");
         jfc.setSelectedFile(new File("test.txt"));
         int test = jfc.showOpenDialog(null);
         if (test == JFileChooser.APPROVE_OPTION) {
             File file = jfc.getSelectedFile();
             testFile = file.getAbsolutePath();
+            lastFolder = file.getParent();
         }
     }//GEN-LAST:event_loadTestDBActionPerformed
 
@@ -867,13 +874,14 @@ public class Interface extends javax.swing.JFrame implements MyLog {
 
     private void loadLabesDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadLabesDBActionPerformed
         //JFileChooser jfc = new JFileChooser(Paths.get(".").toAbsolutePath().normalize().toFile());
-        JFileChooser jfc = new JFileChooser();
+        JFileChooser jfc = new JFileChooser(lastFolder);
         jfc.setDialogTitle("Incarca baza de date bruta");
         jfc.setSelectedFile(new File("etichete.txt"));
         int label = jfc.showOpenDialog(null);
         if (label == JFileChooser.APPROVE_OPTION) {
             File file = jfc.getSelectedFile();
             labelsFile = file.getAbsolutePath();
+            lastFolder = file.getParent();
         }
         step4Run.setEnabled(true);
         hParam.setEnabled(true);
@@ -897,14 +905,7 @@ public class Interface extends javax.swing.JFrame implements MyLog {
     }
 
     //functie care ma ajuta sa iau o parte din imagine
-    private Image ScaledImage(Image img, int w, int h) {
-        BufferedImage resizeImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_BGR);
-        Graphics2D g2 = resizeImage.createGraphics();
-        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        g2.drawImage(img, 0, 0, w, h, null);
-        g2.dispose();
-        return resizeImage;
-    }
+
 
     /**
      * @param args the command line arguments
@@ -959,10 +960,8 @@ public class Interface extends javax.swing.JFrame implements MyLog {
     private javax.swing.JLabel hLabel;
     private javax.swing.JTextField hParam;
     private javax.swing.JLabel imgProcLabel;
-    private javax.swing.JScrollPane imgProcSP;
     private javax.swing.JLabel initialImgLabel;
     private javax.swing.JTextField iteratii;
-    private javax.swing.JScrollPane jSP;
     private javax.swing.JLabel lLabel;
     private javax.swing.JTextField lParam;
     private javax.swing.JScrollPane liniarSP;
@@ -977,6 +976,7 @@ public class Interface extends javax.swing.JFrame implements MyLog {
     private javax.swing.JPanel panelSVM;
     private javax.swing.JPanel panelSteps;
     private steps.MyPanel panouIMG;
+    private steps.MyPanel panouIMGdreapta;
     private javax.swing.JTextField param;
     private javax.swing.JScrollPane rbfSP;
     private javax.swing.JLabel resultLiniar;
@@ -1043,7 +1043,7 @@ public class Interface extends javax.swing.JFrame implements MyLog {
     }
 
     public void setJSPMouseCursor(int cursor) {
-        jSP.setCursor(Cursor.getPredefinedCursor(cursor));
+        panouIMG.setCursor(Cursor.getPredefinedCursor(cursor));
         this.pack();
     }
 
