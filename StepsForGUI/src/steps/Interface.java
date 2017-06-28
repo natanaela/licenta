@@ -7,6 +7,7 @@ package steps;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
@@ -47,7 +48,7 @@ public class Interface extends javax.swing.JFrame implements MyLog {
     public Interface() {
         initComponents();
         ml.referintaInterfata = this;
-        jSP.addMouseListener(ml);
+        panouIMG.addMouseListener(ml);
     }
 
     /**
@@ -73,6 +74,7 @@ public class Interface extends javax.swing.JFrame implements MyLog {
         step4Run = new javax.swing.JButton();
         exportStep4 = new javax.swing.JButton();
         jSP = new javax.swing.JScrollPane();
+        panouIMG = new steps.MyPanel();
         initialImgLabel = new javax.swing.JLabel();
         imgProcSP = new javax.swing.JScrollPane();
         imgProcLabel = new javax.swing.JLabel();
@@ -181,8 +183,26 @@ public class Interface extends javax.swing.JFrame implements MyLog {
         jSP.setMinimumSize(new java.awt.Dimension(0, 0));
         jSP.setPreferredSize(new java.awt.Dimension(0, 0));
 
+        panouIMG.setPreferredSize(new java.awt.Dimension(490, 450));
+
+        javax.swing.GroupLayout panouIMGLayout = new javax.swing.GroupLayout(panouIMG);
+        panouIMG.setLayout(panouIMGLayout);
+        panouIMGLayout.setHorizontalGroup(
+            panouIMGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 490, Short.MAX_VALUE)
+        );
+        panouIMGLayout.setVerticalGroup(
+            panouIMGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 450, Short.MAX_VALUE)
+        );
+
+        jSP.setViewportView(panouIMG);
+
         initialImgLabel.setForeground(new java.awt.Color(0, 51, 255));
         initialImgLabel.setText("Poza initiala");
+
+        imgProcSP.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        imgProcSP.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         imgProcLabel.setForeground(new java.awt.Color(0, 51, 255));
         imgProcLabel.setText("Poza prelucrata");
@@ -281,12 +301,12 @@ public class Interface extends javax.swing.JFrame implements MyLog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(rezultatLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(consolaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelStepsLayout.createSequentialGroup()
-                                .addComponent(jSP, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(imgProcSP, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(consolaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
+                                .addComponent(jSP, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(imgProcSP, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(544, 544, 544))
         );
         panelStepsLayout.setVerticalGroup(
             panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,10 +355,10 @@ public class Interface extends javax.swing.JFrame implements MyLog {
                         .addComponent(exportStep4)
                         .addGap(438, 438, 438))
                     .addGroup(panelStepsLayout.createSequentialGroup()
-                        .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(imgProcSP, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE)
-                            .addComponent(jSP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panelStepsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(imgProcSP, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSP, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(13, 13, 13)
                         .addComponent(rezultatLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(consolaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -545,7 +565,7 @@ public class Interface extends javax.swing.JFrame implements MyLog {
                     .addGroup(panelSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(loadTestDB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(loadTrainDB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(0, 649, Short.MAX_VALUE))
+                .addGap(0, 925, Short.MAX_VALUE))
         );
         panelSVMLayout.setVerticalGroup(
             panelSVMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -556,7 +576,7 @@ public class Interface extends javax.swing.JFrame implements MyLog {
                 .addComponent(loadTestDB)
                 .addGap(18, 18, 18)
                 .addComponent(tabbedPaneParams, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(309, Short.MAX_VALUE))
+                .addContainerGap(327, Short.MAX_VALUE))
         );
 
         tabbedPaneGUI.addTab("Clasificator SVM", null, panelSVM, "");
@@ -662,7 +682,8 @@ public class Interface extends javax.swing.JFrame implements MyLog {
                     imgToSHow.setRGB(col, row, cnew.getRGB());
                 }
             }
-            ImageIcon icon = new ImageIcon(ScaledImage(imgToSHow, jSP.getWidth(), jSP.getHeight()));
+            ImageIcon icon = new ImageIcon(ScaledImage(imgToSHow, imgProcSP.getWidth(), imgProcSP.getHeight()));
+             JLabel jlab = new JLabel();
             jlab.setIcon(icon);
             imgProcSP.getViewport().add(jlab);
             step3Run.setEnabled(true);
@@ -679,12 +700,13 @@ public class Interface extends javax.swing.JFrame implements MyLog {
 
     private void step1RunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_step1RunActionPerformed
 
-        int width = img.getWidth();
-        int height = img.getHeight();
-        processImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-        processImg.setData(img.getData());
+        int width = processImg.getWidth();
+        int height = processImg.getHeight();
+//        processImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+//        processImg.setData(img.getData());
         int thresh = Integer.parseInt(param.getText());
         imgBW = new double[height][width];
+         BufferedImage imgToSHow = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 Color c = new Color(processImg.getRGB(x, y));
@@ -692,11 +714,11 @@ public class Interface extends javax.swing.JFrame implements MyLog {
                 int pixel = red < thresh ? 0 : 255;
                 imgBW[y][x] = red < thresh ? 0 : red == thresh ? 0.5 : 1; // poza cu prima dimensiune = randuri
                 Color cnew = new Color(pixel, pixel, pixel);
-                processImg.setRGB(x, y, cnew.getRGB());
+                imgToSHow.setRGB(x, y, cnew.getRGB());
             }
         }
         JLabel jlab = new JLabel();
-        ImageIcon icon = new ImageIcon(ScaledImage(processImg, jSP.getWidth(), jSP.getHeight()));
+        ImageIcon icon = new ImageIcon(ScaledImage(imgToSHow, imgProcSP.getWidth(), imgProcSP.getHeight()));
         jlab.setIcon(icon);
         imgProcSP.getViewport().add(jlab);
     }//GEN-LAST:event_step1RunActionPerformed
@@ -713,22 +735,17 @@ public class Interface extends javax.swing.JFrame implements MyLog {
             } catch (IOException e) {
                 System.out.println(e);
             }
-
-            showJSP(img);
+            processImg = img;
+            showProcessedImg(processImg);
 
         }
     }//GEN-LAST:event_loadImgButtonActionPerformed
 
-    private void showJSP(BufferedImage img) {
-        jSP.getViewport().removeAll();
-        jSP.getViewport().setSize(img.getWidth(), img.getHeight());
-        ImageIcon icon = new ImageIcon(ScaledImage(img, jSP.getWidth(), jSP.getHeight()));
-        JLabel jlab = new JLabel();
-        jlab.setIcon(icon);
-        //add jLabel to scroll pane
-        jSP.getViewport().add(jlab);
-        this.pack();
-
+    private void showProcessedImg(BufferedImage img) {
+        ImageIcon icon = new ImageIcon(ScaledImage(img, img.getWidth(), img.getHeight()));
+        panouIMG.setPreferredSize(new Dimension(img.getWidth(), img.getHeight()));
+        panouIMG.setImg(icon);
+        panouIMG.repaint();
     }
     private void cRbfParamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cRbfParamActionPerformed
         // TODO add your handling code here:
@@ -864,19 +881,19 @@ public class Interface extends javax.swing.JFrame implements MyLog {
     }//GEN-LAST:event_loadLabesDBActionPerformed
 
     private void cropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cropActionPerformed
-        JOptionPane.showMessageDialog(this, "Click the croping corners, up left and rigt down");
+//        JOptionPane.showMessageDialog(this, "Click the croping corners, up left and rigt down");
         setJSPMouseCursor(Cursor.CROSSHAIR_CURSOR);
         ml.startCroping = true;
     }//GEN-LAST:event_cropActionPerformed
 
     public void scaleImageInput(int luX, int luY, int drX, int drY) {
         int width = drX - luX + 1;
-        int height =drY - luY + 1;
+        int height = drY - luY + 1;
         BufferedImage aux = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-        aux=img.getSubimage(luX, luY, width, height);
-        img = aux;
-        showJSP(img);
+        processImg = processImg.getSubimage(luX, luY, width, height);
+//        showProcessedImg(processImg);
 
+        showProcessedImg(processImg);
     }
 
     //functie care ma ajuta sa iau o parte din imagine
@@ -959,6 +976,7 @@ public class Interface extends javax.swing.JFrame implements MyLog {
     private javax.swing.JPanel panelRbfSVM;
     private javax.swing.JPanel panelSVM;
     private javax.swing.JPanel panelSteps;
+    private steps.MyPanel panouIMG;
     private javax.swing.JTextField param;
     private javax.swing.JScrollPane rbfSP;
     private javax.swing.JLabel resultLiniar;
